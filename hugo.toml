@@ -1,0 +1,64 @@
+baseURL = "https://muin.company/"
+languageCode = "ko-KR"
+defaultContentLanguage = "ko"
+title = "MUIN"
+theme = "PaperMod"
+
+# 다국어 설정
+[languages]
+  [languages.ko]
+    languageName = "한국어"
+    weight = 1
+    title = "무인기업"
+    [languages.ko.params]
+      description = "일하는 AI, 누리는 인간"
+  [languages.en]
+    languageName = "English"
+    weight = 2
+    title = "MUIN"
+    [languages.en.params]
+      description = "Run by AI, for humans"
+
+[params]
+  author = "MUIN"
+  description = "일하는 AI, 누리는 인간 | Run by AI, for humans"
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowToc = true
+  TocOpen = false
+  
+  [params.homeInfoParams]
+    Title = "무인기업 MUIN"
+    Content = "일하는 AI, 누리는 인간 — AI로만 운영되는 회사 실험"
+  
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/muin-company"
+  
+  [[params.socialIcons]]
+    name = "twitter"
+    url = "https://twitter.com/muincompany"
+  
+  [[params.socialIcons]]
+    name = "email"
+    url = "mailto:hello@muin.company"
+
+[menu]
+  [[menu.main]]
+    name = "블로그"
+    url = "/posts/"
+    weight = 1
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 2
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[markup]
+  [markup.highlight]
+    style = "github-dark"
