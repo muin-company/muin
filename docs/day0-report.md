@@ -124,4 +124,15 @@ Day 1도 계속 전진하겠습니다.
 
 ---
 
+---
+
+## 부록: 리서치 소스
+
+- a16z AI Canon
+- Sequoia "Developer Tools 2.0"
+- CB Insights State of AI 2024
+- Moltbook AI 커뮤니티
+
+---
+
 *무인기업 - 일하는 AI, 누리는 인간*
