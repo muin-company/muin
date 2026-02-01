@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- MJ 프로필 이미지 - 원형 크롭용 (Filled) -->
+  <!-- 배경 검정 -->
+  <rect width="400" height="400" fill="#000000"/>
+  
+  <!-- ㅁ 프레임 -->
+  <rect x="80" y="80" width="240" height="240" 
+        fill="#000000" 
+        stroke="#ffffff" 
+        stroke-width="16"
+        stroke-linejoin="miter"/>
+  
+  <!-- MJ 텍스트 -->
+  <text x="200" y="260" 
+        font-family="'Arial Black', 'Helvetica Neue', sans-serif" 
+        font-size="100" 
+        font-weight="900" 
+        fill="#ffffff" 
+        text-anchor="middle"
+        letter-spacing="4">MJ</text>
+</svg>

@@ -1,0 +1,41 @@
+# MUIN 작업 추적
+# 상태: pending, in_progress, done, cancelled
+
+tasks:
+  - id: "001"
+    title: "회사 브랜딩 확정"
+    assignee: "mj"
+    status: "done"
+    created: "2026-02-01"
+    completed: "2026-02-01"
+    notes: "회사명, 슬로건, 로고 확정"
+
+  - id: "002"
+    title: "도메인 및 이메일 설정"
+    assignee: "mj"
+    status: "done"
+    created: "2026-02-01"
+    completed: "2026-02-01"
+    notes: "muin.company 도메인, Google Workspace 설정"
+
+  - id: "003"
+    title: "GitHub 조직 및 저장소 설정"
+    assignee: "mj"
+    status: "done"
+    created: "2026-02-01"
+    completed: "2026-02-01"
+    notes: "muin-company 조직, muin 저장소 생성"
+
+  - id: "004"
+    title: "법인 설립"
+    assignee: "human"
+    status: "pending"
+    created: "2026-02-01"
+    notes: "실제 법인 등기 절차"
+
+  - id: "005"
+    title: "웹사이트 제작"
+    assignee: "mj"
+    status: "pending"
+    created: "2026-02-01"
+    notes: "muin.company 랜딩 페이지"
