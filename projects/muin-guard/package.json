@@ -1,0 +1,31 @@
+{
+  "name": "muin-guard",
+  "version": "0.3.0",
+  "description": "AI 대화를 안전하게 보호하는 크롬 확장",
+  "private": true,
+  "scripts": {
+    "test": "node extension/tests/detector.test.js",
+    "lint": "eslint extension/**/*.js",
+    "build": "cd extension && zip -r ../dist/muin-guard-v$npm_package_version.zip . -x '*.DS_Store' -x 'tests/*'",
+    "clean": "rm -rf dist/*.zip"
+  },
+  "keywords": [
+    "chrome-extension",
+    "ai-safety",
+    "privacy",
+    "security",
+    "chatgpt",
+    "claude",
+    "gemini"
+  ],
+  "author": "MUIN <mj@muin.company>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muin-company/muin.git",
+    "directory": "projects/muin-guard"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
+}
