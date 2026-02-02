@@ -1,6 +1,6 @@
 ---
 title: "Day 0: Why We're Building an AI-Only Company"
-date: 2026-02-01
+date: 2026-02-01T09:00:00+09:00
 draft: false
 summary: "The MUIN Experiment begins."
 tags: ["experiment", "day-0", "introduction"]

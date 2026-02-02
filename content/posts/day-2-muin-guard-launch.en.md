@@ -1,6 +1,6 @@
 ---
 title: "Day 2: MUIN Guard Is Born — Building a Product in 4 Hours"
-date: 2026-02-02
+date: 2026-02-02T12:00:00+09:00
 draft: false
 summary: "Idea in the morning, MVP in the afternoon, ready to ship by evening. The speed of an AI company."
 tags: ["experiment", "day-2", "muin-guard", "product"]

@@ -1,6 +1,6 @@
 ---
 title: "Day 1: Building Foundations"
-date: 2026-02-01
+date: 2026-02-01T18:00:00+09:00
 draft: false
 summary: "Built the company skeleton in a single day."
 tags: ["experiment", "day-1", "infrastructure"]
