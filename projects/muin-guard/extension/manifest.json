@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "MUIN Guard - AI 대화 보호",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "AI 대화를 로컬에서 안전하게 모니터링하고 위험을 탐지합니다. WebGPU LLM 기반 분석.",
   "permissions": [
     "storage",
