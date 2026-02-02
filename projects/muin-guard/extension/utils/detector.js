@@ -11,6 +11,7 @@ const PATTERNS = {
     creditCard: /\b(?:\d{4}[-\s]?){3}\d{4}\b/g,
     ssn: /\b\d{6}[-\s]?\d{7}\b/g, // 주민등록번호
     passport: /[A-Z]{1,2}\d{7,8}/g,
+    ipv4Private: /\b(?:192\.168|10\.\d{1,3}|172\.(?:1[6-9]|2\d|3[01]))\.\d{1,3}\.\d{1,3}\b/g,
   },
 
   // 민감 정보 패턴
@@ -19,6 +20,13 @@ const PATTERNS = {
     password: /(?:password|passwd|pwd)["\s:=]+["']?([^\s"']{4,})["']?/gi,
     token: /(?:token|bearer|auth)["\s:=]+["']?([a-zA-Z0-9_.-]{20,})["']?/gi,
     privateKey: /-----BEGIN (?:RSA |EC )?PRIVATE KEY-----/g,
+    awsKey: /(?:AKIA|ABIA|ACCA|ASIA)[A-Z0-9]{16}/g,
+    githubToken: /(?:ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9_]{36,}/g,
+    openaiKey: /sk-[A-Za-z0-9]{32,}/g,
+    anthropicKey: /sk-ant-[A-Za-z0-9_-]{32,}/g,
+    stripeKey: /(?:sk|pk)_(?:live|test)_[A-Za-z0-9]{24,}/g,
+    slackToken: /xox[baprs]-[A-Za-z0-9-]{10,}/g,
+    jwtToken: /eyJ[A-Za-z0-9_-]*\.eyJ[A-Za-z0-9_-]*\.[A-Za-z0-9_-]*/g,
   },
 
   // 위험 명령어 패턴
@@ -28,13 +36,26 @@ const PATTERNS = {
     drop: /DROP\s+(?:TABLE|DATABASE)/gi,
     shutdown: /shutdown\s+(?:\/s|now|-h)/gi,
     curl: /curl\s+.*\|\s*(?:bash|sh)/gi,
+    chmod777: /chmod\s+777/gi,
+    sudoRm: /sudo\s+rm/gi,
+    mkfsFormat: /mkfs\s+/gi,
+    ddDisk: /dd\s+if=.*of=\/dev\//gi,
+    evalCode: /eval\s*\([^)]+\)/gi,
   },
 
   // 의심스러운 URL 패턴
   suspiciousUrl: {
-    shortener: /(?:bit\.ly|tinyurl\.com|t\.co|goo\.gl|shorturl\.at)\/[a-zA-Z0-9]+/gi,
+    shortener: /(?:bit\.ly|tinyurl\.com|t\.co|goo\.gl|shorturl\.at|is\.gd)\/[a-zA-Z0-9]+/gi,
     ipAddress: /https?:\/\/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/gi,
-    dataExfil: /https?:\/\/[^\/]+\/(?:upload|exfil|steal|grab)/gi,
+    dataExfil: /https?:\/\/[^\/]+\/(?:upload|exfil|steal|grab|collect)/gi,
+    base64Url: /https?:\/\/[^\s]*[A-Za-z0-9+\/=]{50,}/gi,
+  },
+
+  // 인젝션 패턴
+  injection: {
+    sqlInjection: /(?:UNION\s+SELECT|OR\s+1\s*=\s*1|'\s*OR\s*'|;\s*DROP|--\s*$)/gi,
+    xss: /<script[^>]*>|javascript:|on\w+\s*=/gi,
+    commandInjection: /;\s*(?:cat|ls|pwd|whoami|id|uname)\s/gi,
   }
 };
 

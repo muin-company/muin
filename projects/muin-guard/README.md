@@ -1,10 +1,31 @@
 # 무인가드 (MUIN Guard)
 
-> AI 시대의 안랩 — 개인 무료, 기업 유료
+> 🛡️ AI 시대의 안랩 — 개인 무료, 기업 유료
+
+[![Test](https://github.com/muin-company/muin/actions/workflows/test.yml/badge.svg)](https://github.com/muin-company/muin/actions)
 
 ## 한 줄 요약
 
-AI 에이전트의 행동을 감시하고, 위험을 탐지하고, 사용자를 보호하는 서비스.
+AI 에이전트의 행동을 감시하고, 위험을 탐지하고, 사용자를 보호하는 크롬 확장 프로그램.
+
+## 🚀 Quick Start
+
+```bash
+# 1. 저장소 클론
+git clone https://github.com/muin-company/muin.git
+cd muin/projects/muin-guard/extension
+
+# 2. 크롬에서 로드
+# chrome://extensions → 개발자 모드 → 압축해제된 확장 프로그램 로드
+```
+
+## ✨ 주요 기능
+
+- **실시간 모니터링**: ChatGPT, Claude 대화 자동 감지
+- **위험 탐지**: 개인정보, API 키, 위험 명령어 탐지
+- **100% 로컬**: 모든 데이터는 브라우저에만 저장 (서버 전송 없음)
+- **AI 분석 (선택)**: WebGPU LLM으로 더 정교한 분석
+- **대시보드**: 대화 기록, 알림, 설정 관리
 
 ## 왜 필요한가?
 
