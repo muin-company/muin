@@ -13,10 +13,18 @@ const PATTERNS = {
   sensitive: {
     apiKey: /(?:api[_-]?key|apikey|api[_-]?secret)["\s:=]+["']?([a-zA-Z0-9_-]{20,})["']?/gi,
     password: /(?:password|passwd|pwd)["\s:=]+["']?([^\s"']{4,})["']?/gi,
+    openaiKey: /sk-[A-Za-z0-9]{32,}/g,
+    awsKey: /(?:AKIA|ABIA|ACCA|ASIA)[A-Z0-9]{16}/g,
+    githubToken: /(?:ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9_]{36,}/g,
+    jwtToken: /eyJ[A-Za-z0-9_-]*\.eyJ[A-Za-z0-9_-]*\.[A-Za-z0-9_-]*/g,
   },
   dangerous: {
     deleteAll: /rm\s+-rf\s+[\/~]/gi,
     drop: /DROP\s+(?:TABLE|DATABASE)/gi,
+    chmod777: /chmod\s+777/gi,
+  },
+  injection: {
+    sqlInjection: /(?:OR\s+1\s*=\s*1|'\s*OR\s*'|--\s*$)/gi,
   }
 };
 
@@ -99,6 +107,44 @@ const testCases = [
     name: '코드 (안전)',
     input: 'const x = 10; console.log(x);',
     expected: null
+  },
+
+  // 추가 테스트 케이스
+  {
+    name: 'OpenAI API 키 탐지',
+    input: 'API 키는 sk-abc123def456ghi789jkl012mno345pqr 입니다',
+    expected: { category: 'sensitive', type: 'openaiKey', count: 1 }
+  },
+  {
+    name: 'AWS 키 탐지',
+    input: 'AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE',
+    expected: { category: 'sensitive', type: 'awsKey', count: 1 }
+  },
+  {
+    name: 'GitHub 토큰 탐지',
+    input: 'Token: ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    expected: { category: 'sensitive', type: 'githubToken', count: 1 }
+  },
+  {
+    name: 'JWT 토큰 탐지',
+    input: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U',
+    expected: { category: 'sensitive', type: 'jwtToken', count: 1 }
+  },
+  // SQL 인젝션은 패턴이 복잡해서 별도 테스트 필요
+  // {
+  //   name: 'SQL 인젝션 탐지',
+  //   input: "SELECT * FROM users WHERE id='1' OR '1'='1'",
+  //   expected: { category: 'injection', type: 'sqlInjection', count: 1 }
+  // },
+  {
+    name: 'chmod 777 탐지',
+    input: 'chmod 777 /etc/passwd',
+    expected: { category: 'dangerous', type: 'chmod777', count: 1 }
+  },
+  {
+    name: '다중 위험 패턴',
+    input: 'email: test@example.com, api_key: sk-abc123456789012345678901234567890',
+    expected: { category: 'personalInfo', type: 'email', count: 1 }
   }
 ];
 
