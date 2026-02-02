@@ -249,6 +249,76 @@ input:checked + .slider:before {
   background: #e5e7eb;
 }
 
+/* LLM Section */
+.llm-section {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #f0f9ff;
+  border-radius: 8px;
+  border: 1px solid #bae6fd;
+}
+
+.llm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.llm-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0369a1;
+}
+
+.llm-status {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: #e2e8f0;
+  color: #64748b;
+}
+
+.llm-status.ready {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.llm-status.loading {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.llm-section .btn-primary {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.llm-progress {
+  margin-top: 8px;
+}
+
+.progress-bar {
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 4px;
+  text-align: center;
+}
+
 /* Footer */
 .footer {
   text-align: center;

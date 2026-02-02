@@ -6,7 +6,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadStats();
   await loadAlerts();
   await loadSettings();
+  await loadLLMStatus();
   setupEventListeners();
+  
+  // LLM 상태 업데이트 리스너
+  chrome.runtime.onMessage.addListener((message) => {
+    if (message.type === 'LLM_PROGRESS') {
+      updateLLMProgress(message.data);
+    } else if (message.type === 'LLM_READY') {
+      setLLMReady();
+    } else if (message.type === 'LLM_ERROR') {
+      setLLMError(message.data.error);
+    }
+  });
 });
 
 async function loadStats() {
@@ -69,7 +81,78 @@ async function loadSettings() {
   }
 }
 
+async function loadLLMStatus() {
+  try {
+    const response = await chrome.runtime.sendMessage({ type: 'GET_LLM_STATUS' });
+    if (response?.ready) {
+      setLLMReady();
+    }
+  } catch (error) {
+    console.error('Failed to load LLM status:', error);
+  }
+}
+
+function updateLLMProgress(data) {
+  const progressSection = document.getElementById('llmProgress');
+  const progressFill = document.getElementById('progressFill');
+  const progressText = document.getElementById('progressText');
+  const enableBtn = document.getElementById('enableLLM');
+  const llmStatus = document.getElementById('llmStatus');
+
+  progressSection.style.display = 'block';
+  enableBtn.style.display = 'none';
+  llmStatus.textContent = '로딩 중';
+  llmStatus.className = 'llm-status loading';
+
+  const percent = Math.round((data.progress || 0) * 100);
+  progressFill.style.width = `${percent}%`;
+  progressText.textContent = data.text || '모델 로딩 중...';
+}
+
+function setLLMReady() {
+  const progressSection = document.getElementById('llmProgress');
+  const enableBtn = document.getElementById('enableLLM');
+  const llmStatus = document.getElementById('llmStatus');
+
+  progressSection.style.display = 'none';
+  enableBtn.style.display = 'none';
+  llmStatus.textContent = '활성';
+  llmStatus.className = 'llm-status ready';
+}
+
+function setLLMError(error) {
+  const progressSection = document.getElementById('llmProgress');
+  const enableBtn = document.getElementById('enableLLM');
+  const llmStatus = document.getElementById('llmStatus');
+  const progressText = document.getElementById('progressText');
+
+  enableBtn.style.display = 'block';
+  enableBtn.textContent = '다시 시도';
+  llmStatus.textContent = '오류';
+  llmStatus.className = 'llm-status';
+  
+  if (progressSection.style.display !== 'none') {
+    progressText.textContent = `오류: ${error}`;
+    progressText.style.color = '#ef4444';
+  }
+}
+
 function setupEventListeners() {
+  // LLM Enable button
+  document.getElementById('enableLLM').addEventListener('click', async () => {
+    const btn = document.getElementById('enableLLM');
+    btn.disabled = true;
+    btn.textContent = '초기화 중...';
+    
+    try {
+      await chrome.runtime.sendMessage({ type: 'INIT_LLM_FROM_POPUP' });
+    } catch (error) {
+      console.error('Failed to init LLM:', error);
+      btn.disabled = false;
+      btn.textContent = 'AI 분석 활성화';
+    }
+  });
+
   // Enable toggle
   document.getElementById('enableToggle').addEventListener('change', async (e) => {
     const enabled = e.target.checked;

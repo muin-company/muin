@@ -1,6 +1,66 @@
 /**
  * MUIN Guard - Background Service Worker
+ * WebGPU LLM 지원 버전
  */
+
+let llmReady = false;
+let offscreenCreated = false;
+
+// Offscreen Document 생성
+async function setupOffscreenDocument() {
+  if (offscreenCreated) return;
+
+  const existingContexts = await chrome.runtime.getContexts({
+    contextTypes: ['OFFSCREEN_DOCUMENT']
+  });
+
+  if (existingContexts.length > 0) {
+    offscreenCreated = true;
+    return;
+  }
+
+  try {
+    await chrome.offscreen.createDocument({
+      url: 'offscreen/offscreen.html',
+      reasons: ['DOM_PARSER', 'WORKERS'],
+      justification: 'WebGPU LLM for AI safety analysis'
+    });
+    offscreenCreated = true;
+    console.log('[MUIN Guard] Offscreen document created');
+  } catch (error) {
+    console.error('[MUIN Guard] Failed to create offscreen:', error);
+  }
+}
+
+// LLM 초기화
+async function initializeLLM() {
+  await setupOffscreenDocument();
+  
+  try {
+    const response = await chrome.runtime.sendMessage({ type: 'INIT_LLM' });
+    console.log('[MUIN Guard] LLM initialization started');
+  } catch (error) {
+    console.error('[MUIN Guard] LLM init error:', error);
+  }
+}
+
+// LLM으로 텍스트 분석
+async function analyzewithLLM(text) {
+  if (!offscreenCreated) {
+    await setupOffscreenDocument();
+  }
+
+  try {
+    const result = await chrome.runtime.sendMessage({
+      type: 'ANALYZE_TEXT',
+      data: { text }
+    });
+    return result;
+  } catch (error) {
+    console.error('[MUIN Guard] LLM analysis error:', error);
+    return { success: false, error: error.message };
+  }
+}
 
 // 설치 시 초기화
 chrome.runtime.onInstalled.addListener(async (details) => {
@@ -51,6 +111,30 @@ async function handleMessage(message, sender) {
 
     case 'GET_STATS':
       return await getStats();
+
+    case 'INIT_LLM_FROM_POPUP':
+      await initializeLLM();
+      return { success: true };
+
+    case 'GET_LLM_STATUS':
+      return { ready: llmReady, offscreen: offscreenCreated };
+
+    case 'ANALYZE_WITH_LLM':
+      return await analyzewithLLM(data.text);
+
+    case 'LLM_READY':
+      llmReady = true;
+      console.log('[MUIN Guard] LLM is ready');
+      return { success: true };
+
+    case 'LLM_PROGRESS':
+      console.log('[MUIN Guard] LLM Progress:', data.text);
+      return { success: true };
+
+    case 'LLM_ERROR':
+      console.error('[MUIN Guard] LLM Error:', data.error);
+      llmReady = false;
+      return { success: true };
 
     default:
       console.warn('[MUIN Guard] Unknown message type:', type);
