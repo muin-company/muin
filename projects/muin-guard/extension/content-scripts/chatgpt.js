@@ -55,8 +55,34 @@
 
   // 기존 메시지 스캔
   function scanExistingMessages() {
-    const messages = document.querySelectorAll('[data-message-author-role]');
-    messages.forEach(processMessage);
+    // ChatGPT UI는 자주 변경되므로 여러 selector 시도
+    const selectors = [
+      '[data-message-author-role]',
+      '[data-message-id]',
+      '.agent-turn',
+      '.user-turn',
+      '[class*="message"]',
+      '.markdown.prose',
+      '.whitespace-pre-wrap'
+    ];
+
+    let messages = [];
+    for (const selector of selectors) {
+      const found = document.querySelectorAll(selector);
+      if (found.length > 0) {
+        messages = found;
+        console.log(`[MUIN Guard] Found messages with selector: ${selector}`);
+        break;
+      }
+    }
+    
+    messages.forEach(el => {
+      // 메시지 컨테이너 찾기
+      const container = el.closest('[data-message-author-role]') || 
+                        el.closest('[data-message-id]') || 
+                        el;
+      processMessage(container);
+    });
   }
 
   // 새 메시지 감지
