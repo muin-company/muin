@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUIN Guard - AI 대화를 안전하게</title>
+  <meta name="description" content="AI 대화에서 개인정보, API 키, 위험 명령어를 자동 탐지. 100% 로컬 저장으로 프라이버시 보장.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --bg: #0f172a;
+      --bg-light: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      padding: 20px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-icon {
+      font-size: 28px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-light);
+      color: var(--text);
+      border: 1px solid #334155;
+    }
+
+    .btn-secondary:hover {
+      background: #334155;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 160px 0 100px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 20px;
+      font-size: 14px;
+      color: var(--primary);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--primary), #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-image {
+      margin-top: 60px;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      border: 1px solid #334155;
+      max-width: 100%;
+    }
+
+    /* Features */
+    .features {
+      padding: 100px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 40px;
+      font-weight: 700;
+      margin-bottom: 60px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .feature-card {
+      background: var(--bg-light);
+      border-radius: 16px;
+      padding: 32px;
+      border: 1px solid #334155;
+    }
+
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      color: var(--text-muted);
+    }
+
+    /* Privacy */
+    .privacy {
+      padding: 100px 0;
+      background: var(--bg-light);
+    }
+
+    .privacy-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .privacy h2 {
+      font-size: 40px;
+      margin-bottom: 24px;
+    }
+
+    .privacy p {
+      color: var(--text-muted);
+      font-size: 18px;
+      margin-bottom: 32px;
+    }
+
+    .privacy-list {
+      list-style: none;
+    }
+
+    .privacy-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      font-size: 18px;
+    }
+
+    .privacy-list .icon {
+      color: var(--primary);
+      font-size: 24px;
+    }
+
+    /* Detection */
+    .detection {
+      padding: 100px 0;
+    }
+
+    .detection-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .detection-card {
+      background: var(--bg-light);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      border: 1px solid #334155;
+    }
+
+    .detection-card .icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .detection-card h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .detection-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* CTA */
+    .cta {
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 40px;
+      margin-bottom: 24px;
+    }
+
+    .cta p {
+      color: var(--text-muted);
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid #334155;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 24px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    .footer-copyright {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .privacy-content {
+        grid-template-columns: 1fr;
+      }
+
+      .detection-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-content">
+      <a href="/" class="logo">
+        <span class="logo-icon">🛡️</span>
+        <span>MUIN Guard</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#features">기능</a></li>
+          <li><a href="#privacy">프라이버시</a></li>
+          <li><a href="#detection">탐지 항목</a></li>
+          <li><a href="https://github.com/muin-company/muin">GitHub</a></li>
+        </ul>
+      </nav>
+      <a href="#download" class="btn btn-primary">다운로드</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-badge">🎉 무료 출시</div>
+        <h1>AI 대화를<br><span>안전하게</span> 보호하세요</h1>
+        <p>ChatGPT, Claude와 대화할 때 개인정보, API 키, 위험 명령어를 실시간으로 탐지합니다. 100% 로컬 저장으로 프라이버시도 완벽하게 보장.</p>
+        <div class="hero-buttons">
+          <a href="#download" class="btn btn-primary">
+            <span>🌐</span> Chrome에 추가
+          </a>
+          <a href="https://github.com/muin-company/muin/tree/main/projects/muin-guard" class="btn btn-secondary">
+            <span>📦</span> GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="container">
+        <h2 class="section-title">주요 기능</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🔍</div>
+            <h3>실시간 탐지</h3>
+            <p>AI와 대화하는 순간 위험 패턴을 자동으로 감지하고 알려줍니다.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>100% 로컬</h3>
+            <p>모든 데이터는 브라우저에만 저장. 서버 전송 없이 완벽한 프라이버시.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🧠</div>
+            <h3>AI 분석</h3>
+            <p>WebGPU로 로컬 LLM을 실행해 더 정교한 위험 분석을 제공합니다.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>대시보드</h3>
+            <p>대화 기록, 알림, 통계를 한눈에 확인하고 관리할 수 있습니다.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>즉시 시작</h3>
+            <p>설치 후 바로 작동. 복잡한 설정 없이 AI 대화를 보호합니다.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🆓</div>
+            <h3>완전 무료</h3>
+            <p>개인 사용자에게 모든 기능을 무료로 제공합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="privacy" id="privacy">
+      <div class="container privacy-content">
+        <div>
+          <h2>프라이버시가 우선입니다</h2>
+          <p>MUIN Guard는 사용자의 AI 대화를 보호하면서도, 그 대화 내용을 절대 외부로 전송하지 않습니다.</p>
+          <ul class="privacy-list">
+            <li><span class="icon">✅</span> 모든 분석은 브라우저 내에서 실행</li>
+            <li><span class="icon">✅</span> 서버 전송 완전 차단</li>
+            <li><span class="icon">✅</span> 언제든 원클릭 데이터 삭제</li>
+            <li><span class="icon">✅</span> 오픈소스로 투명하게 공개</li>
+          </ul>
+        </div>
+        <div style="text-align: center; font-size: 120px;">
+          🔐
+        </div>
+      </div>
+    </section>
+
+    <section class="detection" id="detection">
+      <div class="container">
+        <h2 class="section-title">이런 것들을 탐지합니다</h2>
+        <div class="detection-grid">
+          <div class="detection-card">
+            <div class="icon">📧</div>
+            <h4>개인정보</h4>
+            <p>이메일, 전화번호, 주민등록번호, 카드번호</p>
+          </div>
+          <div class="detection-card">
+            <div class="icon">🔑</div>
+            <h4>API 키</h4>
+            <p>OpenAI, AWS, GitHub, Stripe, Slack 등</p>
+          </div>
+          <div class="detection-card">
+            <div class="icon">🔐</div>
+            <h4>비밀번호</h4>
+            <p>비밀번호, 토큰, JWT, Private Key</p>
+          </div>
+          <div class="detection-card">
+            <div class="icon">💀</div>
+            <h4>위험 명령</h4>
+            <p>rm -rf, DROP TABLE, sudo rm 등</p>
+          </div>
+          <div class="detection-card">
+            <div class="icon">💉</div>
+            <h4>인젝션</h4>
+            <p>SQL 인젝션, XSS, Command 인젝션</p>
+          </div>
+          <div class="detection-card">
+            <div class="icon">🔗</div>
+            <h4>의심 URL</h4>
+            <p>단축 URL, IP 주소 접속, 데이터 유출 경로</p>
+          </div>
+          <div class="detection-card">
+            <div class="icon">🌐</div>
+            <h4>내부 IP</h4>
+            <p>192.168.x.x, 10.x.x.x 등 사설 IP</p>
+          </div>
+          <div class="detection-card">
+            <div class="icon">➕</div>
+            <h4>그리고 더</h4>
+            <p>30개 이상의 패턴, 계속 업데이트</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="download">
+      <div class="container">
+        <h2>지금 바로 시작하세요</h2>
+        <p>설치 30초, 설정 필요 없음. AI 대화를 안전하게 보호하세요.</p>
+        <div class="hero-buttons">
+          <a href="#" class="btn btn-primary" style="font-size: 18px; padding: 16px 32px;">
+            <span>🌐</span> Chrome Web Store에서 설치
+          </a>
+        </div>
+        <p style="margin-top: 20px; font-size: 14px; color: var(--text-muted);">
+          Chrome, Edge, Brave 등 Chromium 기반 브라우저 지원
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="https://muin.company">무인기업</a>
+        <a href="https://github.com/muin-company/muin">GitHub</a>
+        <a href="/privacy">개인정보처리방침</a>
+        <a href="mailto:mj@muin.company">문의</a>
+      </div>
+      <p class="footer-copyright">
+        © 2026 MUIN (무인기업). 일하는 AI, 누리는 인간.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
