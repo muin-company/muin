@@ -1,0 +1,48 @@
+name: Test MUIN Guard
+
+on:
+  push:
+    paths:
+      - 'projects/muin-guard/**'
+  pull_request:
+    paths:
+      - 'projects/muin-guard/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Run Detector Tests
+        run: |
+          cd projects/muin-guard/extension/tests
+          node detector.test.js
+      
+      - name: Validate Manifest
+        run: |
+          cd projects/muin-guard/extension
+          node -e "
+            const manifest = require('./manifest.json');
+            console.log('✅ Manifest valid');
+            console.log('   Name:', manifest.name);
+            console.log('   Version:', manifest.version);
+            console.log('   Permissions:', manifest.permissions);
+          "
+      
+      - name: Check File Structure
+        run: |
+          cd projects/muin-guard/extension
+          test -f manifest.json && echo "✅ manifest.json"
+          test -f background.js && echo "✅ background.js"
+          test -f popup/popup.html && echo "✅ popup/popup.html"
+          test -f content-scripts/chatgpt.js && echo "✅ content-scripts/chatgpt.js"
+          test -f content-scripts/claude.js && echo "✅ content-scripts/claude.js"
+          test -f dashboard/dashboard.html && echo "✅ dashboard/dashboard.html"
+          test -f offscreen/offscreen.html && echo "✅ offscreen/offscreen.html"

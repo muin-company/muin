@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUIN Guard - 대시보드</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="logo">
+        <span class="logo-icon">🛡️</span>
+        <span class="logo-text">MUIN Guard</span>
+      </div>
+      
+      <ul class="nav-menu">
+        <li class="nav-item active" data-page="overview">
+          <span class="nav-icon">📊</span>
+          <span>개요</span>
+        </li>
+        <li class="nav-item" data-page="conversations">
+          <span class="nav-icon">💬</span>
+          <span>대화 기록</span>
+        </li>
+        <li class="nav-item" data-page="alerts">
+          <span class="nav-icon">🚨</span>
+          <span>알림</span>
+        </li>
+        <li class="nav-item" data-page="settings">
+          <span class="nav-icon">⚙️</span>
+          <span>설정</span>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="privacy-badge">
+          🔒 모든 데이터는 로컬에 저장됩니다
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Overview Page -->
+      <section class="page active" id="page-overview">
+        <h1 class="page-title">대시보드</h1>
+        
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">💬</div>
+            <div class="stat-value" id="stat-conversations">0</div>
+            <div class="stat-label">총 대화</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🚨</div>
+            <div class="stat-value" id="stat-alerts">0</div>
+            <div class="stat-label">탐지된 위험</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🛡️</div>
+            <div class="stat-value" id="stat-protected">0</div>
+            <div class="stat-label">보호된 항목</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🧠</div>
+            <div class="stat-value" id="stat-llm">비활성</div>
+            <div class="stat-label">AI 분석</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title">최근 알림</h2>
+          <div class="alert-list" id="recent-alerts">
+            <div class="empty-state">탐지된 위험이 없습니다 ✅</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title">플랫폼별 현황</h2>
+          <div class="platform-grid" id="platform-stats">
+            <div class="platform-card">
+              <div class="platform-name">ChatGPT</div>
+              <div class="platform-count">0 대화</div>
+            </div>
+            <div class="platform-card">
+              <div class="platform-name">Claude</div>
+              <div class="platform-count">0 대화</div>
+            </div>
+            <div class="platform-card">
+              <div class="platform-name">Gemini</div>
+              <div class="platform-count">0 대화</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Conversations Page -->
+      <section class="page" id="page-conversations">
+        <h1 class="page-title">대화 기록</h1>
+        
+        <div class="filters">
+          <select id="filter-platform">
+            <option value="">전체 플랫폼</option>
+            <option value="chatgpt">ChatGPT</option>
+            <option value="claude">Claude</option>
+            <option value="gemini">Gemini</option>
+          </select>
+          <select id="filter-risk">
+            <option value="">모든 대화</option>
+            <option value="risky">위험 탐지됨</option>
+            <option value="safe">안전</option>
+          </select>
+        </div>
+
+        <div class="conversation-list" id="conversation-list">
+          <div class="empty-state">기록된 대화가 없습니다</div>
+        </div>
+      </section>
+
+      <!-- Alerts Page -->
+      <section class="page" id="page-alerts">
+        <h1 class="page-title">알림</h1>
+        
+        <div class="alert-list full" id="all-alerts">
+          <div class="empty-state">알림이 없습니다</div>
+        </div>
+      </section>
+
+      <!-- Settings Page -->
+      <section class="page" id="page-settings">
+        <h1 class="page-title">설정</h1>
+        
+        <div class="settings-section">
+          <h3>일반</h3>
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">모니터링 활성화</div>
+              <div class="setting-desc">AI 대화를 자동으로 모니터링합니다</div>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="setting-enabled" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">알림</div>
+              <div class="setting-desc">위험 탐지 시 알림을 표시합니다</div>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="setting-notifications" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>플랫폼</h3>
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">ChatGPT</div>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="setting-chatgpt" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">Claude</div>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="setting-claude" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">Gemini</div>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="setting-gemini" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>AI 분석 (WebGPU)</h3>
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">AI 분석 상태</div>
+              <div class="setting-desc" id="llm-status-text">비활성화됨</div>
+            </div>
+            <button class="btn btn-primary" id="enable-llm">활성화</button>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>데이터</h3>
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">데이터 보관 기간</div>
+              <div class="setting-desc">오래된 대화 기록을 자동 삭제합니다</div>
+            </div>
+            <select id="setting-retention">
+              <option value="7">7일</option>
+              <option value="30" selected>30일</option>
+              <option value="90">90일</option>
+              <option value="0">무제한</option>
+            </select>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <div class="setting-label">모든 데이터 삭제</div>
+              <div class="setting-desc">저장된 모든 대화와 알림을 삭제합니다</div>
+            </div>
+            <button class="btn btn-danger" id="clear-data">삭제</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
