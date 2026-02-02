@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUIN Guard</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">🛡️</span>
+        <span class="logo-text">MUIN Guard</span>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="enableToggle" checked>
+        <span class="slider"></span>
+      </label>
+    </header>
+
+    <!-- Stats -->
+    <section class="stats">
+      <div class="stat-item">
+        <div class="stat-value" id="totalConversations">0</div>
+        <div class="stat-label">대화 기록</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="risksDetected">0</div>
+        <div class="stat-label">위험 탐지</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="alertCount">0</div>
+        <div class="stat-label">알림</div>
+      </div>
+    </section>
+
+    <!-- Status -->
+    <section class="status" id="statusSection">
+      <div class="status-icon">✅</div>
+      <div class="status-text">AI 대화를 안전하게 모니터링 중</div>
+    </section>
+
+    <!-- Recent Alerts -->
+    <section class="alerts">
+      <h3 class="section-title">최근 알림</h3>
+      <div class="alert-list" id="alertList">
+        <div class="empty-state">탐지된 위험이 없습니다</div>
+      </div>
+    </section>
+
+    <!-- Actions -->
+    <section class="actions">
+      <button class="btn btn-secondary" id="openDashboard">
+        📊 대시보드
+      </button>
+      <button class="btn btn-secondary" id="openSettings">
+        ⚙️ 설정
+      </button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>무인기업 · 모든 데이터는 로컬에 저장됩니다</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
