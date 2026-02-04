@@ -1,0 +1,42 @@
+{
+  "name": "ai-audit",
+  "version": "1.0.0",
+  "description": "Scan codebases for sensitive data before sharing with AI tools",
+  "main": "lib/scanner.js",
+  "bin": {
+    "ai-audit": "./bin/ai-audit.js"
+  },
+  "scripts": {
+    "test": "node bin/ai-audit.js ."
+  },
+  "keywords": [
+    "security",
+    "secrets",
+    "scanner",
+    "ai",
+    "audit",
+    "api-keys",
+    "sensitive-data",
+    "pii"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "glob": "^10.3.10",
+    "ora": "^8.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "type": "module",
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muin/ai-audit"
+  }
+}
