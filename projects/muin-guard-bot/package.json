@@ -1,0 +1,17 @@
+{
+  "name": "muin-guard-bot",
+  "version": "1.0.0",
+  "description": "Telegram bot that checks text for sensitive data (API keys, passwords, PII)",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "dev": "node --watch bot.js"
+  },
+  "keywords": ["telegram", "bot", "security", "sensitive-data", "muin"],
+  "author": "MUIN",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.1",
+    "node-telegram-bot-api": "^0.66.0"
+  }
+}

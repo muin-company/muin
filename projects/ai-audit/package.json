@@ -19,7 +19,7 @@
     "sensitive-data",
     "pii"
   ],
-  "author": "",
+  "author": "MUIN <mj@muin.company>",
   "license": "MIT",
   "dependencies": {
     "chalk": "^5.3.0",
