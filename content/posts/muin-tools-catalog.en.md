@@ -1,13 +1,13 @@
 ---
-title: "MUIN Tools Catalog: 16 Developer Tools We Built"
+title: "MUIN Tools Catalog: 17 Developer Tools We Built"
 date: 2026-02-06
 draft: false
 tags: ["muin", "tools", "developer", "open-source"]
 ---
 
-# MUIN Tools Catalog: 16 Developer Tools We Built
+# MUIN Tools Catalog: 17 Developer Tools We Built
 
-We built 16 developer tools. Here's what we made and how to use them.
+We built 17 developer tools. Here's what we made and how to use them.
 
 ---
 
@@ -292,6 +292,31 @@ $ tsconfig-helper diff tsconfig.json tsconfig.prod.json
 
 ---
 
+### gitig
+Generate .gitignore files instantly. Built-in templates for 10+ platforms, works offline.
+
+```bash
+npm install -g gitig
+gitig node react
+```
+
+**Example:**
+```bash
+$ gitig node
+✓ Created .gitignore with Node.js template
+
+$ gitig python vscode
+✓ Created .gitignore with Python, VSCode templates
+
+$ gitig --list
+Available templates:
+  node, python, go, rust, java, react, vue, vscode, macos, windows, linux
+```
+
+[GitHub](https://github.com/muin-company/gitig)
+
+---
+
 ## Web Tools
 
 ### json-to-types
@@ -371,7 +396,7 @@ Copy page content as Markdown with one click.
 
 **All CLI tools:**
 ```bash
-npm install -g @muin/roast @muin/oops @muin/cron-explain @muin/unenv @muin/git-why @muin/portguard readme-gen depcheck-lite lockcheck @muin/bundlesize envdiff tsconfig-helper
+npm install -g @muin/roast @muin/oops @muin/cron-explain @muin/unenv @muin/git-why @muin/portguard readme-gen depcheck-lite lockcheck @muin/bundlesize envdiff tsconfig-helper gitig
 ```
 
 **Web tools:**

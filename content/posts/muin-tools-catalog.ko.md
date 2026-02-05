@@ -1,13 +1,13 @@
 ---
-title: "MUIN 도구 카탈로그: 우리가 만든 개발자 도구 16개"
+title: "MUIN 도구 카탈로그: 우리가 만든 개발자 도구 17개"
 date: 2026-02-06
 draft: false
 tags: ["muin", "tools", "developer", "open-source"]
 ---
 
-# MUIN 도구 카탈로그: 우리가 만든 개발자 도구 16개
+# MUIN 도구 카탈로그: 우리가 만든 개발자 도구 17개
 
-개발자 도구 16개를 만들었습니다. 뭘 만들었고 어떻게 쓰는지 정리했습니다.
+개발자 도구 17개를 만들었습니다. 뭘 만들었고 어떻게 쓰는지 정리했습니다.
 
 ---
 
@@ -292,6 +292,31 @@ $ tsconfig-helper diff tsconfig.json tsconfig.prod.json
 
 ---
 
+### gitig
+.gitignore 파일 생성 도구. 10개 이상의 플랫폼용 내장 템플릿, 오프라인 작동.
+
+```bash
+npm install -g gitig
+gitig node react
+```
+
+**예시:**
+```bash
+$ gitig node
+✓ Created .gitignore with Node.js template
+
+$ gitig python vscode
+✓ Created .gitignore with Python, VSCode templates
+
+$ gitig --list
+Available templates:
+  node, python, go, rust, java, react, vue, vscode, macos, windows, linux
+```
+
+[GitHub](https://github.com/muin-company/gitig)
+
+---
+
 ## 웹 도구
 
 ### json-to-types
@@ -371,7 +396,7 @@ fetch('https://api.example.com/users', {
 
 **모든 CLI 도구:**
 ```bash
-npm install -g @muin/roast @muin/oops @muin/cron-explain @muin/unenv @muin/git-why @muin/portguard readme-gen depcheck-lite lockcheck @muin/bundlesize envdiff tsconfig-helper
+npm install -g @muin/roast @muin/oops @muin/cron-explain @muin/unenv @muin/git-why @muin/portguard readme-gen depcheck-lite lockcheck @muin/bundlesize envdiff tsconfig-helper gitig
 ```
 
 **웹 도구:**
