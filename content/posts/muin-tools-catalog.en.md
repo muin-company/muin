@@ -1,13 +1,13 @@
 ---
-title: "MUIN Tools Catalog: 10 Developer Tools We Built"
+title: "MUIN Tools Catalog: 15 Developer Tools We Built"
 date: 2026-02-06
 draft: false
 tags: ["muin", "tools", "developer", "open-source"]
 ---
 
-# MUIN Tools Catalog: 10 Developer Tools We Built
+# MUIN Tools Catalog: 15 Developer Tools We Built
 
-We built 10 developer tools in under 2 days. Here's what we made and how to use them.
+We built 15 developer tools. Here's what we made and how to use them.
 
 ---
 
@@ -139,6 +139,130 @@ $ portguard kill 3000
 
 ---
 
+### readme-gen
+Auto-generate README files from your project structure.
+
+```bash
+npm install -g readme-gen
+readme-gen
+```
+
+**Example:**
+```bash
+$ readme-gen
+Analyzing project...
+Detected project type: node
+README generated: README.md
+
+$ cat README.md
+# my-project
+Node.js project with Express
+...
+```
+
+[GitHub](https://github.com/muin-company/readme-gen)
+
+---
+
+### depcheck-lite
+Find unused dependencies. Fast, lightweight, regex-based checker.
+
+```bash
+npm install -g depcheck-lite
+depcheck-lite
+```
+
+**Example:**
+```bash
+$ depcheck-lite
+Found 2 unused dependencies:
+
+  - lodash
+  - moment
+
+Total: 2/47
+(0.3 seconds)
+```
+
+[GitHub](https://github.com/muin-company/depcheck-lite)
+
+---
+
+### lockcheck
+Lockfile security scanner. Detect suspicious registries, missing hashes, duplicate versions.
+
+```bash
+npm install -g lockcheck
+lockcheck
+```
+
+**Example:**
+```bash
+$ lockcheck
+⚠️  Warnings:
+
+  - Package evil-package@1.0.0 uses non-standard registry
+    URL: https://malicious-registry.com/evil-package/-/evil-package-1.0.0.tgz
+  - Package lodash has 2 different versions: 4.17.20, 4.17.21
+
+$ lockcheck --strict  # Treat warnings as errors in CI
+```
+
+[GitHub](https://github.com/muin-company/lockcheck)
+
+---
+
+### bundlesize
+Bundle size monitor. Catch bundle bloat before it reaches production.
+
+```bash
+npm install --save-dev @muin/bundlesize
+npx bundlesize --init
+```
+
+**Example:**
+```bash
+$ npx bundlesize
+Bundle Size Check Results:
+
+File                     Raw          Gzip         Limit        Status
+------------------------ ------------ ------------ ------------ ------
+dist/main.abc123.js      245.67KB     89.34KB      100KB        ✗ FAIL
+dist/vendor.def456.js    189.23KB     65.12KB      200KB        ✓ PASS
+dist/styles.789ghi.css   18.45KB      7.23KB       20KB         ✓ PASS
+
+✗ Some files exceeded size limits
+```
+
+[GitHub](https://github.com/muin-company/bundlesize)
+
+---
+
+### envdiff
+Compare .env files. Find missing variables before they break your deploy.
+
+```bash
+npm install -g envdiff
+envdiff .env.example .env
+```
+
+**Example:**
+```bash
+$ envdiff .env.example .env
+Missing in .env:
+  - DATABASE_POOL_SIZE
+  - REDIS_URL
+
+Extra in .env:
+  - DEBUG_MODE
+
+$ envdiff .env.staging .env.production --strict  # Use in CI
+```
+
+[GitHub](https://github.com/muin-company/envdiff)
+
+---
+
 ## Web Tools
 
 ### json-to-types
@@ -218,7 +342,7 @@ Copy page content as Markdown with one click.
 
 **All CLI tools:**
 ```bash
-npm install -g @muin/roast @muin/oops @muin/cron-explain @muin/unenv @muin/git-why @muin/portguard
+npm install -g @muin/roast @muin/oops @muin/cron-explain @muin/unenv @muin/git-why @muin/portguard readme-gen depcheck-lite lockcheck @muin/bundlesize envdiff
 ```
 
 **Web tools:**

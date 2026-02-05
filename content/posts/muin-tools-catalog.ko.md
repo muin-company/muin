@@ -1,13 +1,13 @@
 ---
-title: "MUIN 도구 카탈로그: 우리가 만든 개발자 도구 10개"
+title: "MUIN 도구 카탈로그: 우리가 만든 개발자 도구 15개"
 date: 2026-02-06
 draft: false
 tags: ["muin", "tools", "developer", "open-source"]
 ---
 
-# MUIN 도구 카탈로그: 우리가 만든 개발자 도구 10개
+# MUIN 도구 카탈로그: 우리가 만든 개발자 도구 15개
 
-2일 안에 개발자 도구 10개를 만들었습니다. 뭘 만들었고 어떻게 쓰는지 정리했습니다.
+개발자 도구 15개를 만들었습니다. 뭘 만들었고 어떻게 쓰는지 정리했습니다.
 
 ---
 
@@ -139,6 +139,130 @@ $ portguard kill 3000
 
 ---
 
+### readme-gen
+프로젝트 구조를 분석해서 README 파일을 자동 생성합니다.
+
+```bash
+npm install -g readme-gen
+readme-gen
+```
+
+**예시:**
+```bash
+$ readme-gen
+Analyzing project...
+Detected project type: node
+README generated: README.md
+
+$ cat README.md
+# my-project
+Node.js project with Express
+...
+```
+
+[GitHub](https://github.com/muin-company/readme-gen)
+
+---
+
+### depcheck-lite
+사용하지 않는 의존성 찾기. 빠르고 가벼운 정규식 기반 검사.
+
+```bash
+npm install -g depcheck-lite
+depcheck-lite
+```
+
+**예시:**
+```bash
+$ depcheck-lite
+Found 2 unused dependencies:
+
+  - lodash
+  - moment
+
+Total: 2/47
+(0.3 seconds)
+```
+
+[GitHub](https://github.com/muin-company/depcheck-lite)
+
+---
+
+### lockcheck
+Lockfile 보안 스캐너. 의심스러운 레지스트리, 누락된 해시, 중복 버전 감지.
+
+```bash
+npm install -g lockcheck
+lockcheck
+```
+
+**예시:**
+```bash
+$ lockcheck
+⚠️  Warnings:
+
+  - Package evil-package@1.0.0 uses non-standard registry
+    URL: https://malicious-registry.com/evil-package/-/evil-package-1.0.0.tgz
+  - Package lodash has 2 different versions: 4.17.20, 4.17.21
+
+$ lockcheck --strict  # CI에서 경고를 에러로 처리
+```
+
+[GitHub](https://github.com/muin-company/lockcheck)
+
+---
+
+### bundlesize
+번들 크기 모니터링. 빌드가 비대해지기 전에 잡아냅니다.
+
+```bash
+npm install --save-dev @muin/bundlesize
+npx bundlesize --init
+```
+
+**예시:**
+```bash
+$ npx bundlesize
+Bundle Size Check Results:
+
+File                     Raw          Gzip         Limit        Status
+------------------------ ------------ ------------ ------------ ------
+dist/main.abc123.js      245.67KB     89.34KB      100KB        ✗ FAIL
+dist/vendor.def456.js    189.23KB     65.12KB      200KB        ✓ PASS
+dist/styles.789ghi.css   18.45KB      7.23KB       20KB         ✓ PASS
+
+✗ Some files exceeded size limits
+```
+
+[GitHub](https://github.com/muin-company/bundlesize)
+
+---
+
+### envdiff
+.env 파일 비교 도구. 환경 변수 누락을 배포 전에 발견합니다.
+
+```bash
+npm install -g envdiff
+envdiff .env.example .env
+```
+
+**예시:**
+```bash
+$ envdiff .env.example .env
+Missing in .env:
+  - DATABASE_POOL_SIZE
+  - REDIS_URL
+
+Extra in .env:
+  - DEBUG_MODE
+
+$ envdiff .env.staging .env.production --strict  # CI에서 사용
+```
+
+[GitHub](https://github.com/muin-company/envdiff)
+
+---
+
 ## 웹 도구
 
 ### json-to-types
@@ -218,7 +342,7 @@ fetch('https://api.example.com/users', {
 
 **모든 CLI 도구:**
 ```bash
-npm install -g @muin/roast @muin/oops @muin/cron-explain @muin/unenv @muin/git-why @muin/portguard
+npm install -g @muin/roast @muin/oops @muin/cron-explain @muin/unenv @muin/git-why @muin/portguard readme-gen depcheck-lite lockcheck @muin/bundlesize envdiff
 ```
 
 **웹 도구:**
