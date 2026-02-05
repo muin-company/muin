@@ -1,13 +1,13 @@
 ---
-title: "MUIN 도구 카탈로그: 우리가 만든 개발자 도구 15개"
+title: "MUIN 도구 카탈로그: 우리가 만든 개발자 도구 16개"
 date: 2026-02-06
 draft: false
 tags: ["muin", "tools", "developer", "open-source"]
 ---
 
-# MUIN 도구 카탈로그: 우리가 만든 개발자 도구 15개
+# MUIN 도구 카탈로그: 우리가 만든 개발자 도구 16개
 
-개발자 도구 15개를 만들었습니다. 뭘 만들었고 어떻게 쓰는지 정리했습니다.
+개발자 도구 16개를 만들었습니다. 뭘 만들었고 어떻게 쓰는지 정리했습니다.
 
 ---
 
@@ -263,6 +263,35 @@ $ envdiff .env.staging .env.production --strict  # CI에서 사용
 
 ---
 
+### tsconfig-helper
+tsconfig.json 이해, 비교, 생성 도구. 40개 이상의 컴파일러 옵션을 쉬운 말로 설명합니다.
+
+```bash
+npm install -g tsconfig-helper
+tsconfig-helper explain
+```
+
+**예시:**
+```bash
+$ tsconfig-helper explain
+📋 TSConfig Explanation: ./tsconfig.json
+
+🔹 compilerOptions.strict
+   Value: true
+   모든 엄격한 타입 검사 옵션 활성화. 모든 프로젝트에 권장.
+
+$ tsconfig-helper init --type react
+✅ Created react tsconfig.json
+
+$ tsconfig-helper diff tsconfig.json tsconfig.prod.json
+➕ Added in tsconfig.prod.json (2):
+   compilerOptions.sourceMap: false
+```
+
+[GitHub](https://github.com/muin-company/tsconfig-helper)
+
+---
+
 ## 웹 도구
 
 ### json-to-types
@@ -342,7 +371,7 @@ fetch('https://api.example.com/users', {
 
 **모든 CLI 도구:**
 ```bash
-npm install -g @muin/roast @muin/oops @muin/cron-explain @muin/unenv @muin/git-why @muin/portguard readme-gen depcheck-lite lockcheck @muin/bundlesize envdiff
+npm install -g @muin/roast @muin/oops @muin/cron-explain @muin/unenv @muin/git-why @muin/portguard readme-gen depcheck-lite lockcheck @muin/bundlesize envdiff tsconfig-helper
 ```
 
 **웹 도구:**

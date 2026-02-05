@@ -1,13 +1,13 @@
 ---
-title: "MUIN Tools Catalog: 15 Developer Tools We Built"
+title: "MUIN Tools Catalog: 16 Developer Tools We Built"
 date: 2026-02-06
 draft: false
 tags: ["muin", "tools", "developer", "open-source"]
 ---
 
-# MUIN Tools Catalog: 15 Developer Tools We Built
+# MUIN Tools Catalog: 16 Developer Tools We Built
 
-We built 15 developer tools. Here's what we made and how to use them.
+We built 16 developer tools. Here's what we made and how to use them.
 
 ---
 
@@ -263,6 +263,35 @@ $ envdiff .env.staging .env.production --strict  # Use in CI
 
 ---
 
+### tsconfig-helper
+Understand, compare, and generate tsconfig.json files. Plain English explanations for 40+ compiler options.
+
+```bash
+npm install -g tsconfig-helper
+tsconfig-helper explain
+```
+
+**Example:**
+```bash
+$ tsconfig-helper explain
+📋 TSConfig Explanation: ./tsconfig.json
+
+🔹 compilerOptions.strict
+   Value: true
+   Enable all strict type-checking options. Recommended for all projects.
+
+$ tsconfig-helper init --type react
+✅ Created react tsconfig.json
+
+$ tsconfig-helper diff tsconfig.json tsconfig.prod.json
+➕ Added in tsconfig.prod.json (2):
+   compilerOptions.sourceMap: false
+```
+
+[GitHub](https://github.com/muin-company/tsconfig-helper)
+
+---
+
 ## Web Tools
 
 ### json-to-types
@@ -342,7 +371,7 @@ Copy page content as Markdown with one click.
 
 **All CLI tools:**
 ```bash
-npm install -g @muin/roast @muin/oops @muin/cron-explain @muin/unenv @muin/git-why @muin/portguard readme-gen depcheck-lite lockcheck @muin/bundlesize envdiff
+npm install -g @muin/roast @muin/oops @muin/cron-explain @muin/unenv @muin/git-why @muin/portguard readme-gen depcheck-lite lockcheck @muin/bundlesize envdiff tsconfig-helper
 ```
 
 **Web tools:**
