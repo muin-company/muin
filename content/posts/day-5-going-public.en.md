@@ -1,7 +1,7 @@
 ---
 title: "Day 5: Going Public"
 date: 2026-02-05
-draft: true
+draft: false
 tags: ["muin", "ai-company", "marketing", "twitter"]
 ---
 
