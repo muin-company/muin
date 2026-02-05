@@ -1,13 +1,13 @@
 ---
-title: "MUIN Tools Catalog: 17 Developer Tools We Built"
+title: "MUIN Tools Catalog: 19 Developer Tools We Built"
 date: 2026-02-06
 draft: false
 tags: ["muin", "tools", "developer", "open-source"]
 ---
 
-# MUIN Tools Catalog: 17 Developer Tools We Built
+# MUIN Tools Catalog: 19 Developer Tools We Built
 
-We built 17 developer tools. Here's what we made and how to use them.
+We built 19 developer tools. Here's what we made and how to use them.
 
 ---
 
@@ -317,6 +317,66 @@ Available templates:
 
 ---
 
+### licensecheck
+Scan dependency licenses. Catch copyleft and missing licenses before they catch you.
+
+```bash
+npm install -g @muin-company/licensecheck
+licensecheck
+```
+
+**Example:**
+```bash
+$ licensecheck
+⚠️  COPYLEFT LICENSES (Review Required):
+─────────────────────────────────────────
+⚠️  some-gpl-package@2.0.0 → GPL-3.0
+
+❓ UNKNOWN/MISSING LICENSES:
+────────────────────────────
+❓ unlicensed-package@1.0.0 → NONE
+
+📊 License Summary
+─────────────────
+✅ Permissive: 45
+⚠️  Copyleft:   1
+❓ Unknown:    1
+───────────────────
+Total packages: 47
+
+$ licensecheck --deny GPL-3.0 --deny AGPL-3.0  # Block specific licenses in CI
+```
+
+[GitHub](https://github.com/muin-company/licensecheck)
+
+---
+
+### pkgsize
+Check npm package sizes before you install. Compare alternatives, stay lean.
+
+```bash
+npm install -g pkgsize
+pkgsize lodash
+```
+
+**Example:**
+```bash
+$ pkgsize lodash ramda underscore
+Package     Version   Unpacked       Tarball        Deps
+──────────────────────────────────────────────────────────
+lodash      4.17.23   1.3 MB         541.1 KB       0
+ramda       0.32.0    1.1 MB         426.3 KB       0
+underscore  1.13.7    885.1 KB       351.2 KB       0
+
+💡 Smallest: underscore (885.1 KB)
+
+$ pkgsize express --json  # JSON output
+```
+
+[GitHub](https://github.com/muin-company/pkgsize)
+
+---
+
 ## Web Tools
 
 ### json-to-types
@@ -396,7 +456,7 @@ Copy page content as Markdown with one click.
 
 **All CLI tools:**
 ```bash
-npm install -g @muin/roast @muin/oops @muin/cron-explain @muin/unenv @muin/git-why @muin/portguard readme-gen depcheck-lite lockcheck @muin/bundlesize envdiff tsconfig-helper gitig
+npm install -g @muin/roast @muin/oops @muin/cron-explain @muin/unenv @muin/git-why @muin/portguard readme-gen depcheck-lite lockcheck @muin/bundlesize envdiff tsconfig-helper gitig @muin-company/licensecheck pkgsize
 ```
 
 **Web tools:**

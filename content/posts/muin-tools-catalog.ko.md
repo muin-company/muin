@@ -1,13 +1,13 @@
 ---
-title: "MUIN 도구 카탈로그: 우리가 만든 개발자 도구 17개"
+title: "MUIN 도구 카탈로그: 우리가 만든 개발자 도구 19개"
 date: 2026-02-06
 draft: false
 tags: ["muin", "tools", "developer", "open-source"]
 ---
 
-# MUIN 도구 카탈로그: 우리가 만든 개발자 도구 17개
+# MUIN 도구 카탈로그: 우리가 만든 개발자 도구 19개
 
-개발자 도구 17개를 만들었습니다. 뭘 만들었고 어떻게 쓰는지 정리했습니다.
+개발자 도구 19개를 만들었습니다. 뭘 만들었고 어떻게 쓰는지 정리했습니다.
 
 ---
 
@@ -317,6 +317,66 @@ Available templates:
 
 ---
 
+### licensecheck
+의존성 라이선스 스캐너. Copyleft나 누락된 라이선스를 배포 전에 잡아냅니다.
+
+```bash
+npm install -g @muin-company/licensecheck
+licensecheck
+```
+
+**예시:**
+```bash
+$ licensecheck
+⚠️  COPYLEFT LICENSES (Review Required):
+─────────────────────────────────────────
+⚠️  some-gpl-package@2.0.0 → GPL-3.0
+
+❓ UNKNOWN/MISSING LICENSES:
+────────────────────────────
+❓ unlicensed-package@1.0.0 → NONE
+
+📊 License Summary
+─────────────────
+✅ Permissive: 45
+⚠️  Copyleft:   1
+❓ Unknown:    1
+───────────────────
+Total packages: 47
+
+$ licensecheck --deny GPL-3.0 --deny AGPL-3.0  # CI에서 특정 라이선스 차단
+```
+
+[GitHub](https://github.com/muin-company/licensecheck)
+
+---
+
+### pkgsize
+npm 패키지 크기 확인 도구. 설치 전에 크기 비교하고, 가볍게 유지하세요.
+
+```bash
+npm install -g pkgsize
+pkgsize lodash
+```
+
+**예시:**
+```bash
+$ pkgsize lodash ramda underscore
+Package     Version   Unpacked       Tarball        Deps
+──────────────────────────────────────────────────────────
+lodash      4.17.23   1.3 MB         541.1 KB       0
+ramda       0.32.0    1.1 MB         426.3 KB       0
+underscore  1.13.7    885.1 KB       351.2 KB       0
+
+💡 Smallest: underscore (885.1 KB)
+
+$ pkgsize express --json  # JSON 형식으로 출력
+```
+
+[GitHub](https://github.com/muin-company/pkgsize)
+
+---
+
 ## 웹 도구
 
 ### json-to-types
@@ -396,7 +456,7 @@ fetch('https://api.example.com/users', {
 
 **모든 CLI 도구:**
 ```bash
-npm install -g @muin/roast @muin/oops @muin/cron-explain @muin/unenv @muin/git-why @muin/portguard readme-gen depcheck-lite lockcheck @muin/bundlesize envdiff tsconfig-helper gitig
+npm install -g @muin/roast @muin/oops @muin/cron-explain @muin/unenv @muin/git-why @muin/portguard readme-gen depcheck-lite lockcheck @muin/bundlesize envdiff tsconfig-helper gitig @muin-company/licensecheck pkgsize
 ```
 
 **웹 도구:**
