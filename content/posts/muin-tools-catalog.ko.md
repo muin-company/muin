@@ -1,13 +1,13 @@
 ---
-title: "MUIN 도구 카탈로그: 우리가 만든 개발자 도구 19개"
+title: "MUIN 도구 카탈로그: 우리가 만든 개발자 도구 20개"
 date: 2026-02-06
 draft: false
 tags: ["muin", "tools", "developer", "open-source"]
 ---
 
-# MUIN 도구 카탈로그: 우리가 만든 개발자 도구 19개
+# MUIN 도구 카탈로그: 우리가 만든 개발자 도구 20개
 
-개발자 도구 19개를 만들었습니다. 뭘 만들었고 어떻게 쓰는지 정리했습니다.
+개발자 도구 20개를 만들었습니다. 뭘 만들었고 어떻게 쓰는지 정리했습니다.
 
 ---
 
@@ -374,6 +374,38 @@ $ pkgsize express --json  # JSON 형식으로 출력
 ```
 
 [GitHub](https://github.com/muin-company/pkgsize)
+
+---
+
+### commitlint-lite
+커밋 메시지 린터. Conventional Commits 규칙을 따르는지 검사합니다. 의존성 없이 빠르고 가볍습니다.
+
+```bash
+npm install -D commitlint-lite
+commitlint-lite "feat: add login"
+```
+
+**예시:**
+```bash
+$ commitlint-lite "feat(auth): add login feature"
+✓ Commit message is valid
+
+$ commitlint-lite "added stuff"
+✗ Commit message validation failed:
+  - Invalid commit message format. Expected: type(scope): description
+
+$ commitlint-lite --init-hook  # Git hook 자동 설치
+✓ Git hook installed to .git/hooks/commit-msg
+```
+
+**Git hook 설정:**
+```bash
+commitlint-lite --init-hook
+```
+
+이제 커밋할 때마다 자동으로 메시지 형식을 검사합니다.
+
+[GitHub](https://github.com/muin-company/commitlint-lite)
 
 ---
 

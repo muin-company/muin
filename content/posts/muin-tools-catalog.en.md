@@ -1,13 +1,13 @@
 ---
-title: "MUIN Tools Catalog: 19 Developer Tools We Built"
+title: "MUIN Tools Catalog: 20 Developer Tools We Built"
 date: 2026-02-06
 draft: false
 tags: ["muin", "tools", "developer", "open-source"]
 ---
 
-# MUIN Tools Catalog: 19 Developer Tools We Built
+# MUIN Tools Catalog: 20 Developer Tools We Built
 
-We built 19 developer tools. Here's what we made and how to use them.
+We built 20 developer tools. Here's what we made and how to use them.
 
 ---
 
@@ -374,6 +374,38 @@ $ pkgsize express --json  # JSON output
 ```
 
 [GitHub](https://github.com/muin-company/pkgsize)
+
+---
+
+### commitlint-lite
+Commit message linter. Validates Conventional Commits format. Fast and zero dependencies.
+
+```bash
+npm install -D commitlint-lite
+commitlint-lite "feat: add login"
+```
+
+**Example:**
+```bash
+$ commitlint-lite "feat(auth): add login feature"
+✓ Commit message is valid
+
+$ commitlint-lite "added stuff"
+✗ Commit message validation failed:
+  - Invalid commit message format. Expected: type(scope): description
+
+$ commitlint-lite --init-hook  # Auto-install git hook
+✓ Git hook installed to .git/hooks/commit-msg
+```
+
+**Git hook setup:**
+```bash
+commitlint-lite --init-hook
+```
+
+Now every commit will be validated automatically.
+
+[GitHub](https://github.com/muin-company/commitlint-lite)
 
 ---
 
