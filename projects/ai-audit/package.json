@@ -1,5 +1,5 @@
 {
-  "name": "ai-audit",
+  "name": "muin-audit",
   "version": "1.0.0",
   "description": "Scan codebases for sensitive data before sharing with AI tools",
   "main": "lib/scanner.js",
