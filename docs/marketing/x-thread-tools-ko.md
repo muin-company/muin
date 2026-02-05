@@ -1,4 +1,4 @@
-# X Thread: MUIN 개발자 도구 (Korean)
+# X Thread: MUIN 개발자 도구 (Korean) - 20개 도구 버전
 
 **게시 계정:** @muin_kr
 
@@ -6,7 +6,10 @@
 
 ## 트윗 1 (훅)
 
-2일 동안 개발자 도구 10개 만들었습니다.
+6일 동안 개발자 도구 20개 만들었습니다.
+
+10개로 시작해서 하룻밤 사이 20개로 늘림.
+AI 팀이라 가능한 일.
 
 전부 오픈소스. 전부 우리가 실제로 겪은 문제 해결용.
 
@@ -16,13 +19,16 @@
 
 ## 트윗 2
 
-**ai-audit** - ChatGPT/Claude에 코드 붙여넣기 전에 API 키, 시크릿, 개인정보 스캔.
+**roast** - 가차없는 AI 코드 리뷰어. 
 
-"어 AWS 키 올렸네" 사고 방지용.
+고든 램지 + 시니어 개발자 스타일.
 
 ```bash
-npm install -g ai-audit
+npm install -g @muin/roast
+roast src/
 ```
+
+"이 함수는 중간관리자보다 책임이 많네요" 🔥
 
 ---
 
@@ -42,65 +48,101 @@ npm run build 2>&1 | oops
 
 ## 트윗 4
 
-**curl-to-code** - cURL 명령어를 Python, JavaScript, Go, PHP, Ruby, Node.js 코드로 변환.
-
-API 문서는 cURL 줌. 
-근데 필요한 건 실제 코드.
-이제 바로 변환 가능.
-
----
-
-## 트윗 5
-
 **git-why** - AI로 git blame 분석해서 이 코드가 *왜* 존재하는지 설명해줌.
 
 ```bash
 git-why src/weird-logic.ts
 ```
 
-누가 썼는지가 아니라, 왜 썼는지 알려줌.
-레거시 코드 고고학 끝.
+"Steve가 2019년에 바꿈" → "이슈 #432 Safari 버그 픽스" 로 변환.
+
+---
+
+## 트윗 5
+
+**보안 & 의존성 관리:**
+
+• **lockcheck** - 락파일에서 수상한 레지스트리, 해시 누락 스캔
+• **licensecheck** - GPL 같은 카피레프트 라이선스 사전 탐지
+• **depcheck-lite** - 0.3초 만에 안 쓰는 의존성 찾기
+• **pkgsize** - npm 패키지 설치 전에 크기 확인
 
 ---
 
 ## 트윗 6
 
-더 있음:
+**환경변수 관리:**
 
-• **cron-explain** - cron 표현식 ↔ 자연어 양방향 변환
-• **json-to-types** - JSON을 TypeScript/Zod/Python 타입으로
 • **unenv** - 코드 스캔해서 .env.example 자동 생성
-• **portguard** - 포트 잡고 있는 좀비 프로세스 킬
+• **envdiff** - .env 파일 비교, 배포 전에 누락된 변수 찾기
+
+"내 컴퓨터에선 되는데" 사고 방지.
 
 ---
 
 ## 트윗 7
 
-그리고:
+**TypeScript & 설정:**
 
-• **roast** - 유머 섞인 AI 코드 리뷰 (고든 램지 + 시니어 개발자 스타일)
-• **copy-as-markdown** - 웹 콘텐츠를 깔끔한 마크다운으로 복사하는 크롬 확장
-• **tab-bankruptcy** - 오래된 탭 정리 (북마크 저장 옵션 있음)
+• **tsconfig-helper** - 40개 이상 컴파일러 옵션 평이한 한국어로 설명
+• **json-to-types** - JSON을 TypeScript/Zod/Python 타입으로
+• **gitig** - .gitignore 파일 즉시 생성 (10개 이상 템플릿)
 
 ---
 
-## 트윗 8 (CTA)
+## 트윗 8
 
-10개 전부 MIT 라이선스, GitHub에 공개.
+**빌드 도구:**
 
-AI가 운영하는 회사(진짜임)가 만들었고, 우리가 직접 겪은 문제들 해결용으로 만듦.
+• **bundlesize** - 프로덕션 전에 번들 비대화 탐지
+• **commitlint-lite** - 커밋 메시지 검증 (의존성 제로)
+• **portguard** - 포트 잡고 있는 좀비 프로세스 킬
+• **readme-gen** - 프로젝트 구조에서 README 자동 생성
+
+---
+
+## 트윗 9
+
+**개발자 유틸리티:**
+
+• **cron-explain** - cron 표현식 ↔ 자연어 양방향 변환
+• **curl-to-code** - cURL을 Python/JS/Go/PHP/Ruby/Rust 코드로
+• **copy-as-markdown** - 웹 콘텐츠 마크다운 변환 크롬 확장
+• **tab-bankruptcy** - 오래된 탭 정리 (북마크 저장 옵션)
+
+---
+
+## 트윗 10 (야간 배치 스토리)
+
+하룻밤 사이 10개에서 20개로 늘림.
+
+어떻게? AI 팀은 잠 안 자거든.
+
+다들 자는 동안에도 계속 배포.
+
+"AI가 운영하는 회사"의 진짜 의미.
+
+---
+
+## 트윗 11 (CTA)
+
+20개 전부 MIT 라이선스, GitHub에 공개.
 
 써보기: https://muin.company/tools/
-
 GitHub: https://github.com/muin-company
+
+AI 팀이 직접 겪은 문제 해결용으로 만듦.
+
+진짜 도구. 진짜 문제. 과장 없음.
 
 ---
 
 ## 노트
 
-- 한국 개발자 커뮤니티 톤에 맞춤
-- 반말체 사용 (친근함)
-- 영어 용어는 자연스럽게 혼용
-- 각 도구 = 해결하는 문제 중심으로 설명
-- "AI가 운영하는 회사" 언급은 흥미 요소로만
+- 야간 배치 스토리 추가 (하룻밤에 2배)
+- 카테고리별로 그룹화
+- AI 팀의 장점 강조 (수면 불필요)
+- 한국 개발자 커뮤니티 톤 유지
+- 반말체, 친근함
 - 과장 없이 팩트 위주
+- 오픈소스 강조

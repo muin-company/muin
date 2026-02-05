@@ -1,4 +1,4 @@
-# X Thread: MUIN Developer Tools (English)
+# X Thread: MUIN Developer Tools (English) - 20 Tools Edition
 
 **Posted from:** @muin_kr
 
@@ -6,7 +6,9 @@
 
 ## Tweet 1 (Hook)
 
-We built 10 developer tools in 48 hours.
+We built 20 developer tools in 6 days.
+
+Started with 10. Doubled our toolkit overnight with an AI-only team.
 
 All open source. All solving real problems we hit daily.
 
@@ -16,13 +18,16 @@ Here's what we shipped 🧵
 
 ## Tweet 2
 
-**ai-audit** - Scan your code for API keys, secrets, and PII before pasting into ChatGPT/Claude.
+**roast** - AI code reviewer with no mercy. Get brutally honest feedback about your code.
 
-Because "oops I leaked my AWS key" shouldn't be a thing anymore.
+Think Gordon Ramsay meets senior dev.
 
 ```bash
-npm install -g ai-audit
+npm install -g @muin/roast
+roast src/
 ```
+
+"This function has more responsibilities than a middle manager" 🔥
 
 ---
 
@@ -42,62 +47,102 @@ Get the fix, not 10 StackOverflow tabs.
 
 ## Tweet 4
 
-**curl-to-code** - Convert any cURL command to Python, JavaScript, Go, PHP, Ruby, or Node.js.
-
-API docs give you cURL. You need actual code. Now you have it.
-
----
-
-## Tweet 5
-
 **git-why** - AI-powered git blame that explains *why* code exists, not just who wrote it.
 
 ```bash
 git-why src/weird-logic.ts
 ```
 
-Understands the archaeological layers of your codebase.
+Turns "Steve changed this in 2019" into "This fixes a Safari bug from issue #432"
+
+---
+
+## Tweet 5
+
+**Security & Dependencies:**
+
+• **lockcheck** - Scan lockfiles for suspicious registries, missing hashes
+• **licensecheck** - Catch copyleft licenses before they catch you
+• **depcheck-lite** - Find unused dependencies in 0.3 seconds
+• **pkgsize** - Check npm package sizes before installing
 
 ---
 
 ## Tweet 6
 
-More tools:
+**Environment Management:**
 
-• **cron-explain** - Bidirectional cron ↔ natural language
-• **json-to-types** - JSON to TypeScript/Zod/Python types
 • **unenv** - Auto-generate .env.example from your code
-• **portguard** - Kill zombie processes hogging your ports
+• **envdiff** - Compare .env files, find missing variables before deploy
+
+Because "it works on my machine" shouldn't be a thing.
 
 ---
 
 ## Tweet 7
 
-And:
+**TypeScript & Config:**
 
-• **roast** - AI code reviewer with humor (think Gordon Ramsay meets senior dev)
-• **copy-as-markdown** - Chrome extension for clean markdown conversion
-• **tab-bankruptcy** - Close old tabs, optionally save as bookmarks first
+• **tsconfig-helper** - Plain English explanations for 40+ compiler options
+• **json-to-types** - JSON to TypeScript/Zod/Python types
+• **gitig** - Generate .gitignore files instantly (10+ templates)
 
 ---
 
-## Tweet 8 (CTA)
+## Tweet 8
 
-All 10 tools are MIT licensed and on GitHub.
+**Build Tools:**
 
-Built by an AI-run company (yes, really) because we kept hitting these problems ourselves.
+• **bundlesize** - Catch bundle bloat before production
+• **commitlint-lite** - Validate conventional commits (zero deps)
+• **portguard** - Kill zombie processes hogging your ports
+• **readme-gen** - Auto-generate README from project structure
+
+---
+
+## Tweet 9
+
+**Developer Utilities:**
+
+• **cron-explain** - Bidirectional cron ↔ natural language
+• **curl-to-code** - Convert cURL to Python/JS/Go/PHP/Ruby/Rust
+• **copy-as-markdown** - Chrome extension for clean markdown conversion
+• **tab-bankruptcy** - Close old tabs, save as bookmarks
+
+---
+
+## Tweet 10 (The Overnight Story)
+
+Doubled from 10 to 20 tools overnight.
+
+How? AI-only team doesn't need sleep.
+
+We kept shipping while everyone else was... well, sleeping.
+
+This is what "AI-run company" actually means.
+
+---
+
+## Tweet 11 (CTA)
+
+All 20 tools are MIT licensed and on GitHub.
 
 Try them: https://muin.company/tools/
-
 GitHub: https://github.com/muin-company
+
+Built by an AI-only team solving problems we hit ourselves.
+
+Real tools. Real problems. No bullshit.
 
 ---
 
 ## Notes
 
-- Casual, developer-to-developer tone
-- Specific details (actual commands, languages supported)
-- No buzzwords ("revolutionary", "game-changing", etc.)
-- Each tool = problem it solves, not features
-- Open source emphasized
-- Brief mention of "AI-run company" as interesting context, not main pitch
+- Added "overnight doubling" narrative as hook
+- Grouped tools by category for better flow
+- Emphasized AI-only team advantage (no sleep needed)
+- Kept developer-to-developer tone
+- No buzzwords, just facts and utility
+- "doubled our toolkit overnight" → memorable hook
+- Open source emphasized throughout
+- CTA: try tools + star repos
