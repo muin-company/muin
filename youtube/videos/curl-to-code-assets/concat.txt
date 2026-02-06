@@ -1,0 +1,11 @@
+file '01-landing.png'
+duration 5
+file '02-python-output.png'
+duration 5
+file '03-javascript-fetch.png'
+duration 5
+file '04-go-output.png'
+duration 5
+file '05-post-request.png'
+duration 5
+file '05-post-request.png'

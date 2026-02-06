@@ -1,0 +1,124 @@
+{
+  "video_id": "json-to-types-v1",
+  "title": {
+    "primary": "JSON → TypeScript 타입 자동 생성 | 타이핑 작업 10배 빠르게",
+    "alt": "Auto Generate TypeScript Types from JSON | Developer Tools"
+  },
+  "description": {
+    "korean": "🚀 JSON 데이터를 TypeScript 타입 정의로 즉시 변환!\n\nAPI 응답 받아서 일일이 interface 타이핑하시나요? 이제 복붙 한 번이면 끝!\n\n✨ 이 영상에서 배우는 것:\n• JSON을 TypeScript 타입으로 자동 변환\n• Interface와 Type 선택 가능\n• 중첩된 객체 자동 처리\n• 배열 타입 자동 추론\n• Optional 필드 자동 감지\n• 실전 API 응답 예시\n\n🔧 추천 도구들:\n• quicktype.io - 다중 언어 지원\n• transform.tools - 온라인 변환 도구\n• JSON to TS VSCode 확장\n\n⏱️ 타임라인:\n0:00 - 소개\n0:10 - 기본 JSON 변환\n0:20 - 중첩 객체 처리\n0:30 - 배열 타입 변환\n0:40 - 실전 API 예시\n\n💡 TypeScript 개발자라면 필수로 알아야 할 생산성 팁!\n타입 안전성 유지하면서 개발 속도는 10배 빠르게!\n\n🎯 이런 분들께 추천:\n• TypeScript 초보 개발자\n• API 연동 작업이 많은 개발자\n• 타입 정의 작성이 번거로운 분\n• 생산성을 높이고 싶은 개발자\n\n#TypeScript #개발자도구 #생산성 #코딩팁 #타입정의",
+    "english": "🚀 Convert JSON data to TypeScript type definitions instantly!\n\nTired of manually typing interfaces from API responses? Now it's just one copy-paste away!\n\n✨ What you'll learn:\n• Auto-convert JSON to TypeScript types\n• Choose between Interface and Type\n• Handle nested objects automatically\n• Auto-infer array types\n• Detect optional fields\n• Real-world API response examples\n\n🔧 Recommended tools:\n• quicktype.io - Multi-language support\n• transform.tools - Online converter\n• JSON to TS VSCode extension\n\n⏱️ Timeline:\n0:00 - Introduction\n0:10 - Basic JSON conversion\n0:20 - Nested object handling\n0:30 - Array type conversion\n0:40 - Real API examples\n\n💡 Essential productivity tip for TypeScript developers!\nMaintain type safety while coding 10x faster!\n\n🎯 Perfect for:\n• TypeScript beginners\n• Developers working with APIs\n• Anyone tired of typing definitions\n• Developers seeking productivity boost\n\n#TypeScript #developertools #productivity #codingtips #types"
+  },
+  "tags": [
+    "TypeScript",
+    "JSON to TypeScript",
+    "type generation",
+    "developer tools",
+    "productivity tools",
+    "quicktype",
+    "transform tools",
+    "VSCode extensions",
+    "TypeScript types",
+    "interface generation",
+    "API types",
+    "type safety",
+    "web development",
+    "frontend development",
+    "coding tools",
+    "developer productivity",
+    "타입스크립트",
+    "개발자도구",
+    "생산성도구",
+    "코딩팁",
+    "타입정의",
+    "인터페이스",
+    "프론트엔드개발",
+    "웹개발",
+    "API연동"
+  ],
+  "category": "28",
+  "category_name": "Science & Technology",
+  "playlist_suggestions": [
+    "Developer Productivity Tools",
+    "TypeScript Tips & Tricks",
+    "Code Generators & Converters",
+    "Quick Dev Tips",
+    "개발자 생산성 도구",
+    "TypeScript 완전정복"
+  ],
+  "visibility": "public",
+  "license": "youtube",
+  "embeddable": true,
+  "publicStatsViewable": true,
+  "madeForKids": false,
+  "endScreen": {
+    "type": "playlist",
+    "recommendations": [
+      {
+        "type": "best_for_viewer",
+        "duration": 5,
+        "position": "top-left"
+      },
+      {
+        "type": "subscribe",
+        "position": "top-right"
+      },
+      {
+        "type": "playlist",
+        "playlist_name": "Developer Productivity Tools",
+        "position": "bottom-left"
+      },
+      {
+        "type": "video",
+        "video_title": "curl-to-code-v1",
+        "position": "bottom-right"
+      }
+    ]
+  },
+  "cards": [
+    {
+      "type": "link",
+      "message": "Try quicktype.io",
+      "url": "https://quicktype.io",
+      "teaser_duration": 5,
+      "teaser_start_ms": 5000
+    },
+    {
+      "type": "link",
+      "message": "Try transform.tools",
+      "url": "https://transform.tools",
+      "teaser_duration": 5,
+      "teaser_start_ms": 15000
+    }
+  ],
+  "timestamps": [
+    {
+      "time": "0:00",
+      "label": "소개 / Introduction"
+    },
+    {
+      "time": "0:10",
+      "label": "기본 JSON 변환"
+    },
+    {
+      "time": "0:20",
+      "label": "중첩 객체 처리"
+    },
+    {
+      "time": "0:30",
+      "label": "배열 타입 변환"
+    },
+    {
+      "time": "0:40",
+      "label": "실전 API 예시"
+    }
+  ],
+  "pinned_comment": {
+    "korean": "🔥 TypeScript 개발자 여러분, 이 도구 알고 계셨나요?\n\n타입 정의 작성 시간을 90% 줄일 수 있습니다! 저는 매일 사용하고 있어요.\n\n💬 여러분은 어떤 도구를 사용하시나요? 댓글로 공유해주세요!\n\n🔗 추천 도구:\n• quicktype.io → https://quicktype.io\n• transform.tools → https://transform.tools\n\n👍 도움이 되셨다면 좋아요와 구독 부탁드립니다!",
+    "english": "🔥 TypeScript developers, did you know about this tool?\n\nYou can reduce type definition time by 90%! I use it every day.\n\n💬 What tools do you use? Share in the comments!\n\n🔗 Recommended tools:\n• quicktype.io → https://quicktype.io\n• transform.tools → https://transform.tools\n\n👍 If this helped you, please like and subscribe!"
+  },
+  "thumbnail": "json-to-types-v1-thumbnail.png",
+  "language": "ko",
+  "caption_certification": "none",
+  "shorts": false,
+  "premiered": false
+}

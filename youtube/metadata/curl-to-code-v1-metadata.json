@@ -1,0 +1,116 @@
+{
+  "video_id": "curl-to-code-v1",
+  "title": {
+    "primary": "cURL 명령어 → 코드 변환, 5초만에 끝내기 | Developer Tools",
+    "alt": "Convert cURL to Code in 5 Seconds | Python, JavaScript, Go"
+  },
+  "description": {
+    "korean": "🚀 cURL 명령어를 Python, JavaScript, Go 코드로 즉시 변환!\n\nAPI 테스트하다가 받은 cURL 명령어, 매번 손으로 코드로 옮기시나요? 이제 5초면 끝납니다!\n\n✨ 이 영상에서 배우는 것:\n• cURL 명령어 자동 코드 변환\n• Python requests 라이브러리로 변환\n• JavaScript fetch API로 변환\n• Go net/http 패키지로 변환\n• POST 요청과 JSON body 처리\n• 헤더와 인증 정보 자동 변환\n\n🔧 사용 도구: curlconverter.com\n\n⏱️ 타임라인:\n0:00 - 소개\n0:05 - Python 변환 예시\n0:10 - JavaScript 변환\n0:15 - Go 변환\n0:20 - POST 요청 처리\n\n💡 개발자 생산성 도구 시리즈 중 하나입니다. 더 많은 유용한 도구들이 궁금하시다면 구독과 좋아요 부탁드립니다!\n\n🔗 도구 링크: https://curlconverter.com\n\n#개발자도구 #API테스팅 #생산성 #curl #코딩팁",
+    "english": "🚀 Convert cURL commands to Python, JavaScript, Go code instantly!\n\nTired of manually converting cURL commands from API testing into actual code? Now it takes just 5 seconds!\n\n✨ What you'll learn:\n• Automatic cURL to code conversion\n• Convert to Python requests\n• Convert to JavaScript fetch\n• Convert to Go net/http\n• Handle POST requests with JSON body\n• Auto-convert headers and authentication\n\n🔧 Tool used: curlconverter.com\n\n⏱️ Timeline:\n0:00 - Introduction\n0:05 - Python conversion example\n0:10 - JavaScript conversion\n0:15 - Go conversion\n0:20 - POST request handling\n\n💡 Part of our developer productivity tools series. Subscribe for more useful tools!\n\n🔗 Tool link: https://curlconverter.com\n\n#developertools #apitesting #productivity #curl #codingtips"
+  },
+  "tags": [
+    "curl",
+    "curl to code",
+    "curlconverter",
+    "API testing",
+    "developer tools",
+    "Python requests",
+    "JavaScript fetch",
+    "Go HTTP client",
+    "code generator",
+    "productivity tools",
+    "REST API",
+    "HTTP requests",
+    "web development",
+    "backend development",
+    "coding tools",
+    "developer productivity",
+    "API development",
+    "curl 명령어",
+    "개발자도구",
+    "코드변환",
+    "API테스팅",
+    "생산성도구",
+    "프로그래밍",
+    "웹개발",
+    "백엔드개발"
+  ],
+  "category": "28",
+  "category_name": "Science & Technology",
+  "playlist_suggestions": [
+    "Developer Productivity Tools",
+    "Code Generators & Converters",
+    "API Development Tools",
+    "Quick Dev Tips",
+    "개발자 생산성 도구"
+  ],
+  "visibility": "public",
+  "license": "youtube",
+  "embeddable": true,
+  "publicStatsViewable": true,
+  "madeForKids": false,
+  "endScreen": {
+    "type": "playlist",
+    "recommendations": [
+      {
+        "type": "best_for_viewer",
+        "duration": 5,
+        "position": "top-left"
+      },
+      {
+        "type": "subscribe",
+        "position": "top-right"
+      },
+      {
+        "type": "playlist",
+        "playlist_name": "Developer Productivity Tools",
+        "position": "bottom-left"
+      },
+      {
+        "type": "video",
+        "video_title": "json-to-types-v1",
+        "position": "bottom-right"
+      }
+    ]
+  },
+  "cards": [
+    {
+      "type": "link",
+      "message": "Try curlconverter.com",
+      "url": "https://curlconverter.com",
+      "teaser_duration": 5,
+      "teaser_start_ms": 3000
+    }
+  ],
+  "timestamps": [
+    {
+      "time": "0:00",
+      "label": "소개 / Introduction"
+    },
+    {
+      "time": "0:05",
+      "label": "Python requests 변환"
+    },
+    {
+      "time": "0:10",
+      "label": "JavaScript fetch 변환"
+    },
+    {
+      "time": "0:15",
+      "label": "Go net/http 변환"
+    },
+    {
+      "time": "0:20",
+      "label": "POST 요청 처리"
+    }
+  ],
+  "pinned_comment": {
+    "korean": "🔥 이 영상이 도움이 되셨나요? \n\n더 많은 개발자 생산성 도구들을 소개하고 있습니다! 구독하시고 다음 영상도 기대해주세요.\n\n💬 여러분이 자주 사용하는 개발 도구는 무엇인가요? 댓글로 공유해주세요!\n\n🔗 curlconverter.com 바로가기: https://curlconverter.com",
+    "english": "🔥 Was this video helpful?\n\nI'm sharing more developer productivity tools! Subscribe and stay tuned for the next one.\n\n💬 What development tools do you use frequently? Share in the comments!\n\n🔗 Try curlconverter.com: https://curlconverter.com"
+  },
+  "thumbnail": "curl-to-code-v1-thumbnail.png",
+  "language": "ko",
+  "caption_certification": "none",
+  "shorts": false,
+  "premiered": false
+}
