@@ -20,22 +20,44 @@
     </div>
 
     <div class="filter-controls">
-      <label for="category-filter">카테고리:</label>
-      <select id="category-filter">
-        <option value="all">전체</option>
-        <option value="개발도구">개발도구</option>
-        <option value="생산성">생산성</option>
-        <option value="보안">보안</option>
-        <option value="디자인">디자인</option>
-        <option value="유틸리티">유틸리티</option>
-      </select>
+      <div class="filter-group">
+        <label for="type-filter">유형:</label>
+        <select id="type-filter">
+          <option value="all">전체</option>
+          <option value="web">🌐 Web</option>
+          <option value="cli">⌨️ CLI</option>
+          <option value="extension">🧩 Extension</option>
+        </select>
+      </div>
 
-      <label for="sort-select">정렬:</label>
-      <select id="sort-select">
-        <option value="name-asc">이름 (가나다순)</option>
-        <option value="name-desc">이름 (역순)</option>
-        <option value="category">카테고리별</option>
-      </select>
+      <div class="filter-group">
+        <label for="category-filter">카테고리:</label>
+        <select id="category-filter">
+          <option value="all">전체</option>
+          <option value="개발도구">개발도구</option>
+          <option value="생산성">생산성</option>
+          <option value="보안">보안</option>
+          <option value="디자인">디자인</option>
+          <option value="유틸리티">유틸리티</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="sort-select">정렬:</label>
+        <select id="sort-select">
+          <option value="name-asc">이름 (가나다순)</option>
+          <option value="name-desc">이름 (역순)</option>
+          <option value="category">카테고리별</option>
+          <option value="type">유형별</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 활성 필터 표시 -->
+    <div id="active-filters" class="active-filters" style="display: none;">
+      <span class="filter-label">활성 필터:</span>
+      <div id="filter-chips"></div>
+      <button id="clear-filters" class="clear-filters-btn" title="모든 필터 제거">✕ 모두 지우기</button>
     </div>
   </div>
 
@@ -50,19 +72,29 @@
     <div class="tool-card" 
          data-name="{{ .name }}" 
          data-category="{{ .category }}"
+         data-type="{{ .type }}"
          data-description="{{ .description }}"
          data-tags="{{ delimit .tags "," }}">
       
       <div class="tool-card-header">
         <h3 class="tool-name">{{ .name }}</h3>
-        <span class="tool-category">{{ .category }}</span>
+        <div class="tool-badges">
+          {{ if eq .type "web" }}
+          <span class="tool-type-badge type-web" title="Web Tool">🌐 Web</span>
+          {{ else if eq .type "cli" }}
+          <span class="tool-type-badge type-cli" title="Command Line Tool">⌨️ CLI</span>
+          {{ else if eq .type "extension" }}
+          <span class="tool-type-badge type-extension" title="Chrome Extension">🧩 Extension</span>
+          {{ end }}
+          <span class="tool-category">{{ .category }}</span>
+        </div>
       </div>
       
       <p class="tool-description">{{ .description }}</p>
       
       <div class="tool-tags">
         {{ range .tags }}
-        <span class="tool-tag">#{{ . }}</span>
+        <span class="tool-tag clickable-tag" data-tag="{{ . }}" title="이 태그로 필터">#{{ . }}</span>
         {{ end }}
       </div>
       
@@ -82,7 +114,7 @@
   <!-- 결과 없음 메시지 -->
   <div class="no-results" id="no-results" style="display: none;">
     <p>😢 검색 결과가 없습니다.</p>
-    <p>다른 키워드로 검색해보세요.</p>
+    <p>다른 키워드로 검색하거나 필터를 조정해보세요.</p>
   </div>
 </article>
 

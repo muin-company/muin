@@ -4,19 +4,24 @@
 
   // DOM 요소
   const searchInput = document.getElementById('tool-search');
+  const typeFilter = document.getElementById('type-filter');
   const categoryFilter = document.getElementById('category-filter');
   const sortSelect = document.getElementById('sort-select');
   const toolsGrid = document.getElementById('tools-grid');
   const resultCount = document.getElementById('result-count');
   const noResults = document.getElementById('no-results');
+  const activeFiltersContainer = document.getElementById('active-filters');
+  const filterChipsContainer = document.getElementById('filter-chips');
+  const clearFiltersBtn = document.getElementById('clear-filters');
 
   // 모든 도구 카드 가져오기
   let toolCards = Array.from(document.querySelectorAll('.tool-card'));
   const originalOrder = [...toolCards];
 
-  // 검색 함수
-  function searchTools() {
+  // 검색 및 필터 함수
+  function searchAndFilter() {
     const searchTerm = searchInput.value.toLowerCase().trim();
+    const selectedType = typeFilter.value;
     const selectedCategory = categoryFilter.value;
     let visibleCount = 0;
 
@@ -24,6 +29,7 @@
       const name = card.dataset.name.toLowerCase();
       const description = card.dataset.description.toLowerCase();
       const tags = card.dataset.tags.toLowerCase();
+      const type = card.dataset.type;
       const category = card.dataset.category;
 
       // 검색어 매칭
@@ -32,11 +38,14 @@
         description.includes(searchTerm) ||
         tags.includes(searchTerm);
 
+      // 유형 필터링
+      const matchesType = selectedType === 'all' || type === selectedType;
+
       // 카테고리 필터링
       const matchesCategory = selectedCategory === 'all' || category === selectedCategory;
 
-      // 둘 다 매칭되면 표시
-      if (matchesSearch && matchesCategory) {
+      // 모두 매칭되면 표시
+      if (matchesSearch && matchesType && matchesCategory) {
         card.style.display = 'block';
         visibleCount++;
       } else {
@@ -55,13 +64,72 @@
       noResults.style.display = 'none';
       toolsGrid.style.display = 'grid';
     }
+
+    // 활성 필터 UI 업데이트
+    updateActiveFiltersUI();
+  }
+
+  // 활성 필터 UI 업데이트
+  function updateActiveFiltersUI() {
+    const chips = [];
+    
+    // 검색어 칩
+    const searchTerm = searchInput.value.trim();
+    if (searchTerm) {
+      chips.push({ type: 'search', label: `검색: "${searchTerm}"`, value: searchTerm });
+    }
+    
+    // 유형 칩
+    const selectedType = typeFilter.value;
+    if (selectedType && selectedType !== 'all') {
+      const typeLabels = { web: '🌐 Web', cli: '⌨️ CLI', extension: '🧩 Extension' };
+      chips.push({ type: 'type', label: typeLabels[selectedType], value: selectedType });
+    }
+    
+    // 카테고리 칩
+    const selectedCategory = categoryFilter.value;
+    if (selectedCategory && selectedCategory !== 'all') {
+      chips.push({ type: 'category', label: selectedCategory, value: selectedCategory });
+    }
+    
+    // 칩이 있으면 표시, 없으면 숨김
+    if (chips.length === 0) {
+      activeFiltersContainer.style.display = 'none';
+      return;
+    }
+    
+    activeFiltersContainer.style.display = 'flex';
+    filterChipsContainer.innerHTML = '';
+    
+    chips.forEach(chip => {
+      const chipElement = document.createElement('span');
+      chipElement.className = 'filter-chip';
+      chipElement.innerHTML = `
+        ${chip.label}
+        <button class="remove-filter" data-filter-type="${chip.type}" data-filter-value="${chip.value}" title="필터 제거">×</button>
+      `;
+      filterChipsContainer.appendChild(chipElement);
+      
+      // 개별 칩 제거 버튼 이벤트
+      chipElement.querySelector('.remove-filter').addEventListener('click', function() {
+        const filterType = this.dataset.filterType;
+        if (filterType === 'search') {
+          searchInput.value = '';
+        } else if (filterType === 'type') {
+          typeFilter.value = 'all';
+        } else if (filterType === 'category') {
+          categoryFilter.value = 'all';
+        }
+        searchAndFilter();
+        updateURL();
+      });
+    });
   }
 
   // 정렬 함수
   function sortTools() {
     const sortValue = sortSelect.value;
 
-    // 현재 보이는 카드만 정렬
     toolCards.sort((a, b) => {
       switch(sortValue) {
         case 'name-asc':
@@ -75,6 +143,11 @@
           if (categoryCompare !== 0) return categoryCompare;
           return a.dataset.name.localeCompare(b.dataset.name, 'ko');
         
+        case 'type':
+          const typeCompare = a.dataset.type.localeCompare(b.dataset.type, 'ko');
+          if (typeCompare !== 0) return typeCompare;
+          return a.dataset.name.localeCompare(b.dataset.name, 'ko');
+        
         default:
           return 0;
       }
@@ -86,12 +159,89 @@
     });
   }
 
-  // 이벤트 리스너
-  searchInput.addEventListener('input', searchTools);
-  categoryFilter.addEventListener('change', () => {
-    searchTools();
-    sortTools();
+  // URL 파라미터 업데이트 (deep linking)
+  function updateURL() {
+    const params = new URLSearchParams();
+    
+    // 검색어 추가
+    const searchTerm = searchInput.value.trim();
+    if (searchTerm) {
+      params.set('q', searchTerm);
+    }
+    
+    // 유형 추가
+    const type = typeFilter.value;
+    if (type && type !== 'all') {
+      params.set('type', type);
+    }
+    
+    // 카테고리 추가
+    const category = categoryFilter.value;
+    if (category && category !== 'all') {
+      params.set('category', category);
+    }
+    
+    // URL 업데이트 (페이지 리로드 없이)
+    const newURL = params.toString() 
+      ? `${window.location.pathname}?${params.toString()}` 
+      : window.location.pathname;
+    
+    window.history.replaceState({}, '', newURL);
+  }
+
+  // URL 파라미터에서 필터 상태 복원
+  function loadFiltersFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // 검색어 복원
+    const query = urlParams.get('q');
+    if (query) {
+      searchInput.value = query;
+    }
+    
+    // 유형 복원
+    const type = urlParams.get('type');
+    if (type) {
+      typeFilter.value = type;
+    }
+    
+    // 카테고리 복원
+    const category = urlParams.get('category');
+    if (category) {
+      categoryFilter.value = category;
+    }
+    
+    // 필터 적용
+    searchAndFilter();
+  }
+
+  // 모든 필터 초기화
+  clearFiltersBtn.addEventListener('click', function() {
+    searchInput.value = '';
+    typeFilter.value = 'all';
+    categoryFilter.value = 'all';
+    searchAndFilter();
+    updateURL();
   });
+
+  // 이벤트 리스너
+  searchInput.addEventListener('input', () => {
+    debouncedSearch();
+    updateURL();
+  });
+
+  typeFilter.addEventListener('change', () => {
+    searchAndFilter();
+    sortTools();
+    updateURL();
+  });
+
+  categoryFilter.addEventListener('change', () => {
+    searchAndFilter();
+    sortTools();
+    updateURL();
+  });
+
   sortSelect.addEventListener('change', sortTools);
 
   // 검색창 포커스 시 안내
@@ -105,32 +255,34 @@
     }
   });
 
-  // 키보드 단축키: / 키로 검색창 포커스
+  // 키보드 단축키
   document.addEventListener('keydown', (e) => {
+    // / 키로 검색창 포커스
     if (e.key === '/' && !e.ctrlKey && !e.metaKey && 
-        document.activeElement.tagName !== 'INPUT') {
+        document.activeElement.tagName !== 'INPUT' &&
+        document.activeElement.tagName !== 'SELECT') {
       e.preventDefault();
       searchInput.focus();
     }
     
-    // ESC로 검색 초기화
-    if (e.key === 'Escape' && document.activeElement === searchInput) {
-      searchInput.value = '';
-      searchTools();
-      searchInput.blur();
+    // ESC로 모든 필터 초기화
+    if (e.key === 'Escape') {
+      if (document.activeElement === searchInput && searchInput.value) {
+        searchInput.value = '';
+        searchAndFilter();
+        updateURL();
+      } else if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'SELECT') {
+        document.activeElement.blur();
+      } else {
+        // 전체 필터 초기화
+        searchInput.value = '';
+        typeFilter.value = 'all';
+        categoryFilter.value = 'all';
+        searchAndFilter();
+        updateURL();
+      }
     }
   });
-
-  // URL 파라미터로 카테고리 필터 지원
-  const urlParams = new URLSearchParams(window.location.search);
-  const categoryParam = urlParams.get('category');
-  if (categoryParam) {
-    categoryFilter.value = categoryParam;
-    searchTools();
-  }
-
-  // 초기 정렬
-  sortTools();
 
   // 디바운스 함수 (성능 최적화)
   function debounce(func, wait) {
@@ -146,8 +298,10 @@
   }
 
   // 검색에 디바운스 적용 (입력 후 300ms 대기)
-  const debouncedSearch = debounce(searchTools, 300);
-  searchInput.removeEventListener('input', searchTools);
-  searchInput.addEventListener('input', debouncedSearch);
+  const debouncedSearch = debounce(searchAndFilter, 300);
+
+  // 초기화
+  loadFiltersFromURL();
+  sortTools();
 
 })();

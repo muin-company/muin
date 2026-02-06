@@ -2,119 +2,139 @@ tools:
   - name: "JSON to TypeScript"
     description: "JSON 데이터를 TypeScript 타입 정의로 변환합니다. 복잡한 중첩 구조도 지원합니다."
     category: "개발도구"
+    type: "web"
     url: "/projects/json-to-types/"
     tags: ["typescript", "json", "converter"]
     
   - name: "cURL to Code"
     description: "cURL 명령어를 다양한 프로그래밍 언어 코드로 변환합니다. Python, JavaScript, Go 등 지원."
     category: "개발도구"
+    type: "web"
     url: "/projects/curl-to-code/"
     tags: ["curl", "http", "converter"]
     
   - name: "Cron Expression Explainer"
     description: "복잡한 Cron 표현식을 한글로 쉽게 설명해줍니다. 실행 시간 미리보기 제공."
     category: "개발도구"
+    type: "web"
     url: "/projects/cron-explain/"
     tags: ["cron", "scheduler", "tool"]
     
   - name: "Copy as Markdown"
     description: "웹페이지 링크를 마크다운 형식으로 복사하는 브라우저 확장 프로그램"
     category: "생산성"
+    type: "extension"
     url: "/projects/copy-as-markdown/"
     tags: ["markdown", "chrome-extension", "productivity"]
     
   - name: "Tab Bankruptcy"
     description: "너무 많은 탭을 정리해주는 브라우저 확장. 한 번에 모든 탭을 북마크로 저장하고 닫기."
     category: "생산성"
+    type: "extension"
     url: "/projects/tab-bankruptcy/"
     tags: ["chrome-extension", "productivity", "tabs"]
     
   - name: "Paste Safety Checker"
     description: "클립보드에 복사된 내용의 안전성을 검사합니다. 악성 스크립트 탐지."
     category: "보안"
+    type: "web"
     url: "/projects/paste-checker/"
     tags: ["security", "clipboard", "safety"]
     
   - name: "RegEx Tester"
     description: "정규표현식을 실시간으로 테스트하고 결과를 확인할 수 있습니다. 문법 하이라이팅 지원."
     category: "개발도구"
+    type: "web"
     url: "#"
     tags: ["regex", "testing", "tool"]
     
   - name: "Base64 Encoder/Decoder"
     description: "텍스트와 이미지를 Base64로 인코딩하거나 디코딩합니다."
     category: "개발도구"
+    type: "web"
     url: "#"
     tags: ["encoding", "base64", "converter"]
     
   - name: "Color Palette Generator"
     description: "이미지나 색상에서 조화로운 컬러 팔레트를 자동 생성합니다."
     category: "디자인"
+    type: "web"
     url: "#"
     tags: ["design", "color", "palette"]
     
   - name: "Markdown Preview"
     description: "마크다운 텍스트를 실시간으로 렌더링하여 미리보기를 제공합니다."
     category: "생산성"
+    type: "web"
     url: "#"
     tags: ["markdown", "preview", "editor"]
     
   - name: "JWT Debugger"
     description: "JWT 토큰을 디코딩하고 검증합니다. 만료 시간과 클레임 정보를 확인할 수 있습니다."
     category: "개발도구"
+    type: "web"
     url: "#"
     tags: ["jwt", "security", "debugging"]
     
   - name: "Lorem Ipsum Generator"
     description: "다양한 길이의 Lorem Ipsum 더미 텍스트를 생성합니다. 한글 지원."
     category: "생산성"
+    type: "web"
     url: "#"
     tags: ["lorem-ipsum", "text", "generator"]
     
   - name: "QR Code Generator"
     description: "URL, 텍스트, 연락처 정보를 QR 코드로 변환합니다. SVG/PNG 다운로드 지원."
     category: "유틸리티"
+    type: "web"
     url: "#"
     tags: ["qr-code", "generator", "tool"]
     
   - name: "Hash Generator"
     description: "텍스트의 MD5, SHA-1, SHA-256 해시값을 생성합니다."
     category: "보안"
+    type: "cli"
     url: "#"
-    tags: ["hash", "security", "crypto"]
+    tags: ["hash", "security", "crypto", "cli"]
     
   - name: "Diff Checker"
     description: "두 텍스트의 차이점을 시각적으로 비교합니다. 코드 리뷰에 유용."
     category: "개발도구"
+    type: "web"
     url: "#"
     tags: ["diff", "compare", "tool"]
     
   - name: "URL Shortener"
     description: "긴 URL을 짧고 공유하기 쉬운 링크로 변환합니다."
     category: "유틸리티"
+    type: "web"
     url: "#"
     tags: ["url", "shortener", "sharing"]
     
   - name: "Password Generator"
     description: "강력하고 안전한 비밀번호를 생성합니다. 길이와 복잡도 커스터마이징 가능."
     category: "보안"
+    type: "cli"
     url: "#"
-    tags: ["password", "security", "generator"]
+    tags: ["password", "security", "generator", "cli"]
     
   - name: "Image Compressor"
     description: "이미지 품질을 유지하면서 파일 크기를 최적화합니다. 여러 형식 지원."
     category: "유틸리티"
+    type: "web"
     url: "#"
     tags: ["image", "compression", "optimization"]
     
   - name: "Timezone Converter"
     description: "전 세계 시간대를 쉽게 변환하고 비교합니다. 회의 시간 조율에 유용."
     category: "유틸리티"
+    type: "web"
     url: "#"
     tags: ["timezone", "time", "converter"]
     
   - name: "CSS Minifier"
     description: "CSS 코드를 압축하여 파일 크기를 줄입니다. 웹 성능 최적화."
     category: "개발도구"
+    type: "cli"
     url: "#"
-    tags: ["css", "minifier", "optimization"]
+    tags: ["css", "minifier", "optimization", "cli"]
