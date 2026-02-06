@@ -1,0 +1,326 @@
+/* Tools 페이지 스타일 */
+
+.tools-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.tools-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.tools-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+
+.tools-description {
+  font-size: 1.1rem;
+  color: var(--secondary);
+  margin-top: 0.5rem;
+}
+
+/* 검색 및 필터 컨트롤 */
+.tools-controls {
+  background: var(--entry);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-box {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+#tool-search {
+  width: 100%;
+  padding: 0.875rem 1rem 0.875rem 2.75rem;
+  font-size: 1rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--theme);
+  color: var(--content);
+  transition: border-color 0.2s ease;
+}
+
+#tool-search:focus {
+  outline: none;
+  border-color: var(--tertiary);
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  opacity: 0.5;
+}
+
+.filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.filter-controls label {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.filter-controls select {
+  padding: 0.5rem 0.875rem;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  background: var(--theme);
+  color: var(--content);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.filter-controls select:focus {
+  outline: none;
+  border-color: var(--tertiary);
+}
+
+/* 결과 카운터 */
+.tools-count {
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--secondary);
+  text-align: right;
+}
+
+#result-count {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* 도구 그리드 */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* 도구 카드 */
+.tool-card {
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.tool-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  border-color: var(--tertiary);
+}
+
+.tool-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.875rem;
+  gap: 0.5rem;
+}
+
+.tool-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+  flex: 1;
+}
+
+.tool-category {
+  background: var(--tertiary);
+  color: var(--theme);
+  padding: 0.25rem 0.625rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tool-description {
+  color: var(--secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.tool-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tool-tag {
+  font-size: 0.8rem;
+  color: var(--tertiary);
+  background: var(--code-bg);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.tool-actions {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.tool-link {
+  display: inline-block;
+  padding: 0.625rem 1.25rem;
+  background: var(--tertiary);
+  color: var(--theme);
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background 0.2s ease;
+  text-align: center;
+  width: 100%;
+}
+
+.tool-link:hover {
+  background: var(--primary);
+  color: var(--theme);
+}
+
+.tool-coming-soon {
+  display: inline-block;
+  padding: 0.625rem 1.25rem;
+  background: var(--border);
+  color: var(--secondary);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-style: italic;
+  text-align: center;
+  width: 100%;
+}
+
+/* 결과 없음 메시지 */
+.no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--secondary);
+}
+
+.no-results p:first-child {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.no-results p:last-child {
+  font-size: 1rem;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .tools-page {
+    padding: 1rem 0.5rem;
+  }
+
+  .tools-header h1 {
+    font-size: 2rem;
+  }
+
+  .tools-controls {
+    padding: 1rem;
+  }
+
+  .filter-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .filter-controls select {
+    width: 100%;
+  }
+
+  .tools-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .tool-card {
+    padding: 1.25rem;
+  }
+
+  .tool-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tool-category {
+    align-self: flex-start;
+  }
+}
+
+/* 다크모드 대응 */
+@media (prefers-color-scheme: dark) {
+  .tool-card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .tool-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  .tools-controls {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* 로딩 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tool-card {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* 접근성 개선 */
+.tool-link:focus,
+#tool-search:focus,
+.filter-controls select:focus {
+  outline: 2px solid var(--tertiary);
+  outline-offset: 2px;
+}
+
+/* 인쇄 스타일 */
+@media print {
+  .tools-controls {
+    display: none;
+  }
+
+  .tool-card {
+    page-break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+}

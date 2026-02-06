@@ -52,9 +52,13 @@ theme = "PaperMod"
     url = "/posts/"
     weight = 1
   [[menu.main]]
+    name = "Tools"
+    url = "/tools/"
+    weight = 2
+  [[menu.main]]
     name = "About"
     url = "/about/"
-    weight = 2
+    weight = 3
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]

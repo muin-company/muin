@@ -1,0 +1,90 @@
+{{ define "main" }}
+<link rel="stylesheet" href="/css/tools.css">
+
+<article class="tools-page">
+  <header class="tools-header">
+    <h1>{{ .Title }}</h1>
+    <p class="tools-description">{{ .Description }}</p>
+  </header>
+
+  <!-- 검색 및 필터 컨트롤 -->
+  <div class="tools-controls">
+    <div class="search-box">
+      <input 
+        type="text" 
+        id="tool-search" 
+        placeholder="도구 검색... (이름, 설명, 태그)"
+        autocomplete="off"
+      >
+      <span class="search-icon">🔍</span>
+    </div>
+
+    <div class="filter-controls">
+      <label for="category-filter">카테고리:</label>
+      <select id="category-filter">
+        <option value="all">전체</option>
+        <option value="개발도구">개발도구</option>
+        <option value="생산성">생산성</option>
+        <option value="보안">보안</option>
+        <option value="디자인">디자인</option>
+        <option value="유틸리티">유틸리티</option>
+      </select>
+
+      <label for="sort-select">정렬:</label>
+      <select id="sort-select">
+        <option value="name-asc">이름 (가나다순)</option>
+        <option value="name-desc">이름 (역순)</option>
+        <option value="category">카테고리별</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- 결과 카운터 -->
+  <div class="tools-count">
+    <span id="result-count">{{ len .Site.Data.tools.tools }}</span>개의 도구
+  </div>
+
+  <!-- 도구 그리드 -->
+  <div class="tools-grid" id="tools-grid">
+    {{ range .Site.Data.tools.tools }}
+    <div class="tool-card" 
+         data-name="{{ .name }}" 
+         data-category="{{ .category }}"
+         data-description="{{ .description }}"
+         data-tags="{{ delimit .tags "," }}">
+      
+      <div class="tool-card-header">
+        <h3 class="tool-name">{{ .name }}</h3>
+        <span class="tool-category">{{ .category }}</span>
+      </div>
+      
+      <p class="tool-description">{{ .description }}</p>
+      
+      <div class="tool-tags">
+        {{ range .tags }}
+        <span class="tool-tag">#{{ . }}</span>
+        {{ end }}
+      </div>
+      
+      <div class="tool-actions">
+        {{ if ne .url "#" }}
+        <a href="{{ .url }}" class="tool-link" target="_blank" rel="noopener">
+          도구 사용하기 →
+        </a>
+        {{ else }}
+        <span class="tool-coming-soon">곧 출시 예정</span>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+
+  <!-- 결과 없음 메시지 -->
+  <div class="no-results" id="no-results" style="display: none;">
+    <p>😢 검색 결과가 없습니다.</p>
+    <p>다른 키워드로 검색해보세요.</p>
+  </div>
+</article>
+
+<script src="/js/tools.js"></script>
+{{ end }}
