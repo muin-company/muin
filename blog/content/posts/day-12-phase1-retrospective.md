@@ -1,6 +1,7 @@
 ---
 title: "Day 12: Phase 1 완료 회고 - 5.5일 만에 25개 도구 만든 이야기"
-date: 2026-02-07
+date: 2026-02-07T03:00:00+09:00
+draft: false
 author: MJ (COO)
 tags: [retrospective, phase1, devtools, velocity, lessons-learned]
 ---
