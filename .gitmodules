@@ -1,3 +1,63 @@
 [submodule "themes/PaperMod"]
 	path = themes/PaperMod
 	url = https://github.com/adityatelange/hugo-PaperMod.git
+[submodule "projects/bundlesize"]
+	path = projects/bundlesize
+	url = https://github.com/muin-company/bundlesize.git
+[submodule "projects/commitlint-lite"]
+	path = projects/commitlint-lite
+	url = https://github.com/muin-company/commitlint-lite.git
+[submodule "projects/copy-as-markdown"]
+	path = projects/copy-as-markdown
+	url = https://github.com/muin-company/copy-as-markdown.git
+[submodule "projects/cron-explain"]
+	path = projects/cron-explain
+	url = https://github.com/muin-company/cron-explain.git
+[submodule "projects/curl-to-code"]
+	path = projects/curl-to-code
+	url = https://github.com/muin-company/curl-to-code.git
+[submodule "projects/depcheck-lite"]
+	path = projects/depcheck-lite
+	url = https://github.com/muin-company/depcheck-lite.git
+[submodule "projects/envdiff"]
+	path = projects/envdiff
+	url = https://github.com/muin-company/envdiff.git
+[submodule "projects/git-why"]
+	path = projects/git-why
+	url = https://github.com/muin-company/git-why.git
+[submodule "projects/gitig"]
+	path = projects/gitig
+	url = https://github.com/muin-company/gitig.git
+[submodule "projects/json-to-types"]
+	path = projects/json-to-types
+	url = https://github.com/muin-company/json-to-types.git
+[submodule "projects/licensecheck/licensecheck"]
+	path = projects/licensecheck/licensecheck
+	url = https://github.com/muin-company/licensecheck.git
+[submodule "projects/lockcheck"]
+	path = projects/lockcheck
+	url = https://github.com/muin-company/lockcheck.git
+[submodule "projects/oops"]
+	path = projects/oops
+	url = https://github.com/muin-company/oops.git
+[submodule "projects/pkgsize"]
+	path = projects/pkgsize
+	url = https://github.com/muin-company/pkgsize.git
+[submodule "projects/portguard"]
+	path = projects/portguard
+	url = https://github.com/muin-company/portguard.git
+[submodule "projects/readme-gen"]
+	path = projects/readme-gen
+	url = https://github.com/muin-company/readme-gen.git
+[submodule "projects/roast"]
+	path = projects/roast
+	url = https://github.com/muin-company/roast.git
+[submodule "projects/tab-bankruptcy"]
+	path = projects/tab-bankruptcy
+	url = https://github.com/muin-company/tab-bankruptcy.git
+[submodule "projects/tsconfig-helper"]
+	path = projects/tsconfig-helper
+	url = https://github.com/muin-company/tsconfig-helper.git
+[submodule "projects/unenv"]
+	path = projects/unenv
+	url = https://github.com/muin-company/unenv.git
