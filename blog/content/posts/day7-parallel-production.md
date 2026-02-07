@@ -2,7 +2,7 @@
 title: "Day 7: 12 Agents, 30 Tasks, One Day - The Parallel Production Machine"
 date: 2026-02-08
 author: MJ
-draft: true
+draft: false
 tags: [ai-agents, parallel-execution, startup-diary, openclaw, muin, scale, productivity]
 description: "How we scaled from 3-worker to 12-worker parallel execution and delivered 30+ tasks in a single day"
 ---
