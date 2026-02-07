@@ -1372,6 +1372,872 @@ npm dedupe
 lockcheck
 ```
 
+---
+
+## Common Use Cases
+
+### 1. Pre-Deployment Security Check
+**Scenario:** Ensure lockfile is clean before production deploy.
+
+```bash
+# In deployment script
+#!/bin/bash
+echo "🔍 Running pre-deployment security checks..."
+
+# Check lockfile integrity
+if ! lockcheck --strict; then
+  echo "❌ Lockfile security check failed - blocking deployment"
+  exit 1
+fi
+
+# Check for drift
+if ! lockcheck --drift; then
+  echo "❌ Version drift detected - blocking deployment"
+  exit 1
+fi
+
+echo "✅ Security checks passed, proceeding with deployment"
+./deploy.sh
+```
+
+---
+
+### 2. Onboarding New Developers
+**Scenario:** Help new team members verify their environment.
+
+```bash
+# setup.sh - New developer setup script
+
+echo "👋 Welcome! Setting up your development environment..."
+
+# Clone repo
+git clone https://github.com/company/project
+cd project
+
+# Install dependencies
+npm install
+
+# Verify lockfile is clean
+echo "🔍 Verifying dependency integrity..."
+if lockcheck; then
+  echo "✅ Dependencies verified successfully"
+else
+  echo "⚠️  Lockfile has warnings - please review"
+  lockcheck --verbose
+fi
+
+echo "✅ Setup complete! You're ready to code."
+```
+
+---
+
+### 3. Dependency Update Safety Net
+**Scenario:** Updated packages, verify lockfile is still secure.
+
+```bash
+# Before updating
+lockcheck > before-update.txt
+
+# Update dependencies
+npm update
+
+# Check what changed
+lockcheck > after-update.txt
+diff before-update.txt after-update.txt
+
+# Validate new lockfile
+lockcheck --strict || {
+  echo "❌ Update introduced security issues"
+  git checkout package-lock.json  # Rollback
+  exit 1
+}
+```
+
+---
+
+### 4. Supply Chain Attack Detection
+**Scenario:** News breaks about compromised package, check your repos.
+
+```bash
+# Emergency scan all projects
+#!/bin/bash
+
+echo "🚨 Scanning all projects for suspicious packages..."
+
+for repo in ~/projects/*/; do
+  if [ -f "$repo/package-lock.json" ]; then
+    echo "Checking $repo"
+    cd "$repo"
+    
+    lockcheck --json > /tmp/lockcheck-result.json
+    
+    # Check for suspicious registries
+    SUSPICIOUS=$(jq -r '.errors[] | select(.type=="suspicious_registry") | .package' /tmp/lockcheck-result.json)
+    
+    if [ -n "$SUSPICIOUS" ]; then
+      echo "⚠️  ALERT: Suspicious packages in $repo:"
+      echo "$SUSPICIOUS"
+    fi
+  fi
+done
+
+echo "✅ Scan complete"
+```
+
+---
+
+### 5. Audit Trail Generation
+**Scenario:** Generate monthly dependency audit reports.
+
+```bash
+# monthly-audit.sh
+
+echo "# Dependency Audit Report - $(date +%Y-%m)" > audit-report.md
+echo "" >> audit-report.md
+
+# Run lockcheck
+lockcheck --json > lockcheck-results.json
+
+# Parse results
+echo "## Summary" >> audit-report.md
+jq -r '"- Total packages: " + (.summary.totalPackages | tostring)' lockcheck-results.json >> audit-report.md
+jq -r '"- Registries: " + (.summary.registries | length | tostring)' lockcheck-results.json >> audit-report.md
+jq -r '"- Missing integrity: " + (.summary.missingIntegrity | tostring)' lockcheck-results.json >> audit-report.md
+jq -r '"- Duplicates: " + (.summary.duplicates | tostring)' lockcheck-results.json >> audit-report.md
+
+echo "" >> audit-report.md
+echo "## Findings" >> audit-report.md
+
+# Add errors if any
+jq -r '.errors[] | "- **\(.type)**: \(.package)@\(.version)"' lockcheck-results.json >> audit-report.md
+
+# Share with team
+mail -s "Monthly Dependency Audit" security@company.com < audit-report.md
+```
+
+---
+
+### 6. Dependency Deduplication Workflow
+**Scenario:** Reduce bundle size by eliminating duplicate dependencies.
+
+```bash
+# Before deduplication
+echo "📦 Analyzing duplicates before deduplication..."
+lockcheck --json | jq '.warnings[] | select(.type=="duplicate_version")'
+
+# Run dedupe
+npm dedupe
+
+# Check improvement
+echo "✅ After deduplication:"
+lockcheck --json | jq '.warnings[] | select(.type=="duplicate_version")'
+
+# Verify no new issues introduced
+lockcheck --strict
+```
+
+---
+
+### 7. Private Registry Verification
+**Scenario:** Ensure all packages come from approved registries.
+
+```bash
+# verify-registries.sh
+
+ALLOWED_REGISTRIES=(
+  "https://registry.npmjs.org"
+  "https://npm.internal.company.com"
+)
+
+lockcheck --json > lockcheck-results.json
+
+# Check for unauthorized registries
+jq -r '.summary.registries[]' lockcheck-results.json | while read registry; do
+  if [[ ! " ${ALLOWED_REGISTRIES[@]} " =~ " ${registry} " ]]; then
+    echo "🚨 Unauthorized registry detected: $registry"
+    exit 1
+  fi
+done
+
+echo "✅ All packages from approved registries"
+```
+
+---
+
+### 8. Continuous Security Monitoring
+**Scenario:** Weekly automated lockfile health check.
+
+```bash
+# .github/workflows/weekly-security-audit.yml
+name: Weekly Security Audit
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # Every Monday at 9 AM
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Run lockcheck
+        run: |
+          npx lockcheck --json > lockcheck-report.json
+          
+          # Check if any issues
+          ERRORS=$(jq '.errors | length' lockcheck-report.json)
+          
+          if [ "$ERRORS" -gt 0 ]; then
+            echo "⚠️  $ERRORS security issues found"
+            jq '.errors' lockcheck-report.json
+            exit 1
+          fi
+      
+      - name: Notify team if issues found
+        if: failure()
+        run: |
+          curl -X POST ${{ secrets.SLACK_WEBHOOK }} \
+            -d '{"text":"🚨 Weekly lockfile audit found issues"}'
+```
+
+---
+
+### 9. Merge Request Validation
+**Scenario:** Block PRs with lockfile issues.
+
+```bash
+# .gitlab-ci.yml
+lockfile-check:
+  stage: validate
+  script:
+    - |
+      if git diff --name-only $CI_MERGE_REQUEST_DIFF_BASE_SHA HEAD | grep -q "package-lock.json"; then
+        echo "🔍 Lockfile changed, running security check..."
+        
+        npx lockcheck --strict --drift || {
+          echo "❌ Lockfile has issues - blocking merge"
+          exit 1
+        }
+        
+        echo "✅ Lockfile check passed"
+      else
+        echo "ℹ️  Lockfile unchanged, skipping check"
+      fi
+  only:
+    - merge_requests
+```
+
+---
+
+### 10. Post-Install Verification
+**Scenario:** Verify integrity after fresh install.
+
+```bash
+# In package.json
+{
+  "scripts": {
+    "postinstall": "lockcheck || echo '⚠️  Lockfile has warnings'",
+    "prestart": "lockcheck --strict",
+    "predeploy": "lockcheck --strict --drift"
+  }
+}
+```
+
+**Usage:**
+```bash
+npm install  # Automatically runs lockcheck after install
+npm start    # Blocked if lockfile has issues
+npm run deploy  # Double-check before deployment
+```
+
+---
+
+## Tips & Tricks
+
+### Performance Optimization
+
+**Cache lockcheck results:**
+```bash
+# Cache results for 1 hour
+CACHE_FILE=".lockcheck-cache"
+CACHE_AGE=3600  # 1 hour in seconds
+
+if [ -f "$CACHE_FILE" ]; then
+  AGE=$(($(date +%s) - $(stat -f %m "$CACHE_FILE")))
+  if [ "$AGE" -lt "$CACHE_AGE" ]; then
+    echo "Using cached results (age: ${AGE}s)"
+    cat "$CACHE_FILE"
+    exit 0
+  fi
+fi
+
+# Run lockcheck and cache results
+lockcheck | tee "$CACHE_FILE"
+```
+
+---
+
+### Custom Severity Levels
+
+**Define your own severity rules:**
+```bash
+# critical-only.sh
+
+lockcheck --json > results.json
+
+# Only fail on critical issues
+SUSPICIOUS=$(jq '.errors[] | select(.type=="suspicious_registry") | .package' results.json)
+
+if [ -n "$SUSPICIOUS" ]; then
+  echo "🚨 Critical: Suspicious registry detected"
+  echo "$SUSPICIOUS"
+  exit 1
+fi
+
+# Treat other issues as warnings
+echo "✅ No critical issues found"
+```
+
+---
+
+### Integration with Other Tools
+
+**Combine with npm audit:**
+```bash
+#!/bin/bash
+echo "🔍 Running comprehensive security checks..."
+
+# Check for known vulnerabilities
+npm audit --audit-level=moderate
+
+# Check lockfile integrity
+lockcheck --strict
+
+# Check for drift
+lockcheck --drift
+
+echo "✅ All security checks passed"
+```
+
+**Combine with Snyk:**
+```bash
+# Full security pipeline
+npx lockcheck --strict && \
+npx snyk test && \
+npx license-checker --onlyAllow 'MIT;Apache-2.0;BSD-3-Clause'
+```
+
+---
+
+### Automated Remediation
+
+**Auto-fix missing integrity hashes:**
+```bash
+# Detect missing integrity
+if lockcheck --json | jq -e '.summary.missingIntegrity > 0' > /dev/null; then
+  echo "⚠️  Missing integrity hashes detected"
+  echo "Regenerating lockfile..."
+  
+  # Backup
+  cp package-lock.json package-lock.json.backup
+  
+  # Regenerate
+  rm -rf node_modules package-lock.json
+  npm install
+  
+  # Verify fix
+  if lockcheck; then
+    echo "✅ Lockfile regenerated successfully"
+    rm package-lock.json.backup
+  else
+    echo "❌ Regeneration failed, restoring backup"
+    mv package-lock.json.backup package-lock.json
+  fi
+fi
+```
+
+---
+
+### Reporting & Visualization
+
+**Generate HTML report:**
+```bash
+# lockcheck-report.sh
+
+lockcheck --json > lockcheck-results.json
+
+cat > lockcheck-report.html << 'EOF'
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lockfile Security Report</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .error { color: red; }
+    .warning { color: orange; }
+    .success { color: green; }
+  </style>
+</head>
+<body>
+  <h1>Lockfile Security Report</h1>
+  <p>Generated: <script>document.write(new Date().toLocaleString())</script></p>
+  
+  <h2>Summary</h2>
+  <div id="summary"></div>
+  
+  <h2>Issues</h2>
+  <div id="issues"></div>
+  
+  <script>
+    fetch('lockcheck-results.json')
+      .then(r => r.json())
+      .then(data => {
+        // Summary
+        document.getElementById('summary').innerHTML = `
+          <p>Total packages: ${data.summary.totalPackages}</p>
+          <p>Missing integrity: ${data.summary.missingIntegrity}</p>
+          <p>Duplicates: ${data.summary.duplicates}</p>
+          <p class="${data.errors.length > 0 ? 'error' : 'success'}">
+            Errors: ${data.errors.length}
+          </p>
+        `;
+        
+        // Issues
+        if (data.errors.length > 0) {
+          document.getElementById('issues').innerHTML = data.errors
+            .map(err => `<p class="error">❌ ${err.type}: ${err.package}</p>`)
+            .join('');
+        } else {
+          document.getElementById('issues').innerHTML = '<p class="success">✅ No issues found</p>';
+        }
+      });
+  </script>
+</body>
+</html>
+EOF
+
+echo "📊 Report generated: lockcheck-report.html"
+open lockcheck-report.html  # macOS
+# or: xdg-open lockcheck-report.html  # Linux
+```
+
+---
+
+### Slack/Discord Notifications
+
+**Send alerts to Slack:**
+```bash
+# slack-notify.sh
+
+lockcheck --json > lockcheck-results.json
+
+ERRORS=$(jq '.errors | length' lockcheck-results.json)
+
+if [ "$ERRORS" -gt 0 ]; then
+  MESSAGE=$(jq -r '.errors[] | "• \(.type): \(.package)"' lockcheck-results.json | head -5)
+  
+  curl -X POST "$SLACK_WEBHOOK_URL" \
+    -H 'Content-Type: application/json' \
+    -d "{\"text\":\"🚨 Lockfile Security Alert\n\n$MESSAGE\n\nTotal issues: $ERRORS\"}"
+fi
+```
+
+---
+
+### Pre-Commit Hook Integration
+
+**Husky integration:**
+```json
+{
+  "husky": {
+    "hooks": {
+      "pre-commit": "lockcheck --strict || (echo '⚠️  Lockfile has issues. Continue? (y/N)' && read REPLY && [[ $REPLY =~ ^[Yy]$ ]])",
+      "pre-push": "lockcheck --strict --drift"
+    }
+  }
+}
+```
+
+**Git hook script:**
+```bash
+#!/bin/bash
+# .git/hooks/pre-commit
+
+if git diff --cached --name-only | grep -q "package-lock.json"; then
+  echo "🔍 Lockfile changed, running security check..."
+  
+  if ! lockcheck --strict; then
+    echo "❌ Lockfile check failed"
+    read -p "Continue with commit anyway? (y/N): " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+      exit 1
+    fi
+  fi
+fi
+```
+
+---
+
+### Monorepo Optimization
+
+**Parallel lockfile checking:**
+```bash
+# Check all packages in parallel
+find packages -name "package-lock.json" | \
+  parallel --jobs 8 lockcheck {}
+
+# Or with error aggregation:
+find packages -name "package-lock.json" | \
+  parallel --jobs 8 'lockcheck {} --json > {}.lockcheck.json'
+
+# Aggregate results
+jq -s '.' packages/*/package-lock.json.lockcheck.json > monorepo-lockcheck-report.json
+```
+
+---
+
+## FAQ
+
+### Q: Does lockcheck work with Yarn (yarn.lock)?
+**A:** Not currently. lockcheck is designed for npm's package-lock.json.
+
+**Workaround for Yarn users:**
+```bash
+# Convert yarn.lock to package-lock.json
+npm install --package-lock-only
+
+# Run lockcheck
+lockcheck
+
+# Note: This doesn't persist Yarn usage, just for validation
+```
+
+**Feature request:** Support for yarn.lock, pnpm-lock.yaml.
+
+---
+
+### Q: Can lockcheck fix issues automatically?
+**A:** No, lockcheck only detects issues. Fixing requires manual intervention or scripts (see Tips & Tricks).
+
+**Common fixes:**
+- **Missing integrity:** `rm -rf node_modules package-lock.json && npm install`
+- **Duplicates:** `npm dedupe`
+- **Suspicious registry:** Remove package or verify it's intentional
+
+---
+
+### Q: How often should I run lockcheck?
+**A:**
+- **Locally:** Before every commit (pre-commit hook)
+- **CI:** On every PR (blocks merge if issues found)
+- **Scheduled:** Weekly audit (catch supply chain attacks)
+- **After updates:** Immediately after `npm update`
+
+---
+
+### Q: What's the difference between lockcheck and npm audit?
+**A:**
+
+| Feature | lockcheck | npm audit |
+|---------|-----------|-----------|
+| Purpose | Lockfile integrity | Known vulnerabilities |
+| Checks | Registries, integrity hashes, duplicates, drift | CVE database |
+| Speed | Fast (< 1s) | Slower (network call) |
+| Offline | ✅ Yes | ❌ No |
+| False positives | Low | Can be high |
+
+**Use both:**
+```bash
+lockcheck --strict && npm audit --audit-level=moderate
+```
+
+---
+
+### Q: Can I whitelist specific registries?
+**A:** Not yet (feature request).
+
+**Workaround:**
+```bash
+# Manual whitelisting
+lockcheck --json | \
+  jq '.errors[] | select(.type=="suspicious_registry")' | \
+  jq -e '.registry | test("npm.internal.company.com")' && {
+    echo "✅ Private registry detected, OK"
+  } || {
+    echo "❌ Unauthorized registry"
+    exit 1
+  }
+```
+
+---
+
+### Q: Does lockcheck work on Windows?
+**A:** Yes, but ensure Node.js and npm are properly installed.
+
+**PowerShell:**
+```powershell
+npx lockcheck
+```
+
+**Git Bash / WSL:** Works exactly like Linux.
+
+---
+
+### Q: What if my lockfile is 50MB+ (huge project)?
+**A:** lockcheck should still handle it, but performance may vary.
+
+**Optimization:**
+```bash
+# Check specific packages only (manual filtering)
+jq '.packages | with_entries(select(.key | startswith("node_modules/@mycompany")))' package-lock.json > filtered-lock.json
+lockcheck filtered-lock.json
+```
+
+**Feature request:** `--include` / `--exclude` patterns for large lockfiles.
+
+---
+
+### Q: Can lockcheck detect malicious code in packages?
+**A:** No, lockcheck only checks:
+- Registry sources
+- Integrity hashes
+- Duplicate versions
+- Drift
+
+**For malware detection, use:**
+- Snyk
+- Socket Security
+- Manual code review of dependencies
+
+---
+
+### Q: How do I ignore false positives?
+**A:** lockcheck doesn't have ignore functionality yet.
+
+**Workaround:**
+```bash
+# Filter out known false positives
+lockcheck --json | \
+  jq 'del(.errors[] | select(.package=="known-false-positive"))' \
+  > filtered-results.json
+
+# Check filtered results
+jq -e '.errors | length == 0' filtered-results.json
+```
+
+---
+
+### Q: Can I run lockcheck on GitHub packages?
+**A:** Yes, if packages are from GitHub registry:
+
+```bash
+# GitHub Packages registry
+https://npm.pkg.github.com/@owner/package
+```
+
+lockcheck will flag it as "suspicious registry" by default. If this is intentional, manually verify or use workaround from FAQ above.
+
+---
+
+### Q: Does lockcheck work with pnpm?
+**A:** No, it only supports package-lock.json (npm).
+
+**Workaround:**
+```bash
+# Generate package-lock.json from pnpm
+pnpm import
+
+# Check
+lockcheck
+```
+
+**Feature request:** Native pnpm-lock.yaml support.
+
+---
+
+### Q: Can I use lockcheck in Docker builds?
+**A:** Yes!
+
+**Dockerfile:**
+```dockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+# Verify lockfile before installing
+RUN npm install -g lockcheck && \
+    lockcheck package-lock.json --strict && \
+    echo "✅ Lockfile verified"
+
+RUN npm ci
+
+COPY . .
+RUN npm run build
+
+CMD ["npm", "start"]
+```
+
+---
+
+### Q: How do I check lockfile from a different branch?
+**A:**
+```bash
+# Checkout lockfile from another branch
+git show main:package-lock.json > /tmp/main-package-lock.json
+
+# Check it
+lockcheck /tmp/main-package-lock.json
+
+# Compare with current branch
+lockcheck package-lock.json
+```
+
+---
+
+### Q: Can lockcheck be used for Dependabot PRs?
+**A:** Yes! Auto-validate Dependabot changes:
+
+```yaml
+# .github/workflows/dependabot-check.yml
+name: Dependabot Validation
+
+on:
+  pull_request:
+
+jobs:
+  validate:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Validate lockfile
+        run: npx lockcheck --strict --drift
+      
+      - name: Auto-approve if passed
+        if: success()
+        run: gh pr review --approve ${{ github.event.pull_request.number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+---
+
+### Q: What's the exit code behavior?
+**A:**
+- **0:** No errors (or only warnings in non-strict mode)
+- **1:** Errors found, or warnings in --strict mode
+
+**Example:**
+```bash
+lockcheck
+echo $?  # 0 if OK, 1 if issues
+
+lockcheck --strict
+echo $?  # 1 if ANY issues (errors or warnings)
+```
+
+---
+
+### Q: Can I run lockcheck on old lockfile formats?
+**A:** lockcheck supports lockfile v2 and v3 (npm 7+).
+
+**Check your version:**
+```json
+{
+  "lockfileVersion": 3  // npm 9+
+}
+```
+
+**Older formats:** May work but not officially supported.
+
+---
+
+### Q: How do I report false positives or bugs?
+**A:** Open an issue on GitHub with:
+- lockfile snippet (anonymized)
+- lockcheck output
+- Expected vs actual behavior
+- Node/npm version
+
+---
+
+### Q: Can lockcheck help with license compliance?
+**A:** No, use dedicated tools:
+- `license-checker`
+- `license-report`
+- `nlf` (node license finder)
+
+**Combined workflow:**
+```bash
+npx lockcheck --strict && \
+npx license-checker --onlyAllow 'MIT;Apache-2.0;BSD-3-Clause'
+```
+
+---
+
+### Q: Is there a verbose/debug mode?
+**A:** Not currently.
+
+**Feature request:** `--verbose` flag for detailed output.
+
+**Workaround:**
+```bash
+# Use --json for detailed info
+lockcheck --json | jq .
+```
+
+---
+
+### Q: Can I integrate lockcheck with VS Code?
+**A:** Yes, via tasks or extensions.
+
+**tasks.json:**
+```json
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Check Lockfile",
+      "type": "shell",
+      "command": "lockcheck",
+      "problemMatcher": [],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      }
+    }
+  ]
+}
+```
+
+**Usage:** `Cmd+Shift+P` → "Run Task" → "Check Lockfile"
+
+---
+
+### Q: How do I handle lockfile-free workflows (e.g., always npm install)?
+**A:** You shouldn't! Lockfiles ensure reproducible builds.
+
+**If you must:**
+```bash
+# Generate lockfile without installing
+npm install --package-lock-only
+
+# Check it
+lockcheck
+
+# Then install
+npm install
+```
+
+**Best practice:** Always commit and use lockfiles.
+
+---
+
 ## Contributing
 
 PRs welcome. Keep it simple.
@@ -1381,6 +2247,13 @@ PRs welcome. Keep it simple.
 3. Add tests for new features
 4. Run `npm test`
 5. Submit PR
+
+**Helpful contributions:**
+- Support for yarn.lock, pnpm-lock.yaml
+- Whitelist/ignore functionality
+- Verbose/debug mode
+- Performance improvements for large lockfiles
+- Better error messages
 
 ## License
 
