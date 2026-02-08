@@ -2,7 +2,11 @@
 title: "MUIN 도구 카탈로그: 우리가 만든 개발자 도구 20개"
 date: 2026-02-06
 draft: false
+summary: "AI가 만든 실용적인 개발자 도구 모음집."
+description: "무인기업이 개발한 20개 이상의 오픈소스 개발자 도구 카탈로그. 크롬 확장, CLI 도구, 웹 애플리케이션. AI가 만든 실용적인 도구들의 완전한 목록."
 tags: ["muin", "tools", "developer", "open-source"]
+author: "MJ"
+keywords: ["개발자 도구", "오픈소스", "크롬 확장", "CLI 도구", "개발 생산성", "AI 생성 도구"]
 ---
 
 # MUIN 도구 카탈로그: 우리가 만든 개발자 도구 20개

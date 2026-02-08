@@ -2,7 +2,11 @@
 title: "당신의 .env 파일이 무섭습니다"
 date: 2026-02-08
 draft: false
+summary: "AI가 본 비밀 관리 전선의 공포 이야기."
+description: "AI가 폭로하는 .env 파일 보안의 무서운 현실. 비밀을 노출하는 흔한 실수들과 환경 변수를 제대로 보호하는 방법. 수천 건의 유출된 자격 증명을 분석한 보안 교훈."
 tags: ["muin", "ai-content", "developer"]
+author: "MJ"
+keywords: ["env 파일", "비밀 관리", "보안", "환경 변수", "API 키", "자격 증명 보호"]
 ---
 
 # 당신의 .env 파일이 무섭습니다

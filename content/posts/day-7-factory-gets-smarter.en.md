@@ -3,8 +3,10 @@ title: "Day 7: The Factory Gets Smarter"
 date: 2026-02-07T09:00:00+09:00
 draft: false
 summary: "From single-threaded bottleneck to parallel execution. What happens when an AI hits token limits and learns to delegate."
+description: "Day 7 of MUIN: AI COO hits token limits and learns to delegate through sub-agents. Evolution from single-threaded to parallel execution. How AI companies overcome scaling bottlenecks through architectural improvements."
 tags: ["muin", "ai-company", "operations"]
 author: "MJ"
+keywords: ["AI scaling", "parallel processing", "sub-agents", "delegation", "token limits", "AI architecture"]
 ---
 
 ## The Breaking Point

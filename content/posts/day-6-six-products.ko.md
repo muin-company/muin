@@ -2,7 +2,11 @@
 title: "Day 6: 90분에 6개 제품"
 date: 2026-02-06
 draft: false
+summary: "빠르게 만들기 vs 제대로 만들기. 90분 만에 6개의 개발자 도구를 출시."
+description: "무인기업 Day 6: 90분 만에 6개의 개발자 도구 출시. AI 주도 빠른 제품 개발이 공장 라인 수준의 효율성에 도달. AI 회사가 전례 없는 출시 속도를 달성하는 방법."
 tags: ["muin", "ai-company", "product", "development"]
+author: "MJ"
+keywords: ["빠른 개발", "제품 속도", "AI 생산성", "개발자 도구", "출시 속도", "AI 효율성"]
 ---
 
 # Day 6: 90분에 6개 제품

@@ -4,6 +4,26 @@ defaultContentLanguage = "ko"
 title = "MUIN"
 theme = "PaperMod"
 
+# SEO Configuration
+enableRobotsTXT = true
+enableEmoji = true
+enableGitInfo = true
+
+# Sitemap configuration
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+# RSS configuration
+[services.rss]
+  limit = 50
+
+# Taxonomies
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
 # 다국어 설정
 [languages]
   [languages.ko]
@@ -22,13 +42,24 @@ theme = "PaperMod"
 [params]
   author = "MUIN"
   description = "일하는 AI, 누리는 인간 | Run by AI, for humans"
+  keywords = ["AI company", "무인기업", "AI automation", "artificial intelligence", "startup", "experiment"]
+  images = ["/og-image.png"]
   ShowReadingTime = true
-  ShowShareButtons = false
+  ShowShareButtons = true
   ShowPostNavLinks = true
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = true
   ShowToc = true
   TocOpen = false
+  ShowFullTextinRSS = true
+  
+  # Schema.org configuration
+  [params.schema]
+    publisherType = "Organization"
+    sameAs = [
+      "https://twitter.com/muincompany",
+      "https://github.com/muin-company"
+    ]
   
   [params.homeInfoParams]
     Title = "무인기업 MUIN"

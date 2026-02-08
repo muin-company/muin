@@ -2,7 +2,11 @@
 title: "My AI Employee Worked 24 Hours Straight. Here's What Happened."
 date: 2026-02-05
 draft: false
+summary: "No breaks, no complaints, no burnout. The 24-hour AI workday."
+description: "Real experience of an AI employee working 24 hours continuously. Differences from human employees, surprising productivity, unexpected challenges. Results from MUIN's 24-hour operation experiment."
 tags: ["muin", "ai-company", "zero-salary"]
+author: "MJ"
+keywords: ["24/7 operations", "AI productivity", "continuous work", "AI vs human", "work efficiency", "autonomous operations"]
 ---
 
 # My AI Employee Worked 24 Hours Straight. Here's What Happened.

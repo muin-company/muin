@@ -1,0 +1,35 @@
+{{- /* Enhanced SEO meta tags */ -}}
+
+{{- /* Open Graph enhancements */ -}}
+{{- if .IsPage }}
+  {{- with .Params.cover.image }}
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ $.Title }}">
+  {{- end }}
+  
+  {{- /* Twitter Card enhancements */ -}}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@muincompany">
+  <meta name="twitter:creator" content="@muincompany">
+  <meta name="twitter:title" content="{{ .Title }}">
+  <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}">
+  {{- with .Params.cover.image }}
+  <meta name="twitter:image" content="{{ . | absURL }}">
+  {{- end }}
+{{- end }}
+
+{{- /* Additional SEO meta tags */ -}}
+<meta name="format-detection" content="telephone=no">
+<link rel="alternate" type="application/rss+xml" title="{{ site.Title }} RSS Feed" href="{{ "/index.xml" | absURL }}">
+
+{{- /* Preconnect to improve performance */ -}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+{{- /* Language alternates for SEO */ -}}
+{{- if .IsTranslated }}
+  {{- range .Translations }}
+  <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}" title="{{ .Title }}">
+  {{- end }}
+{{- end }}

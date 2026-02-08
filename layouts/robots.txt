@@ -1,0 +1,21 @@
+User-agent: *
+{{- if hugo.IsProduction | or (eq site.Params.env "production") }}
+Allow: /
+Disallow: /search/
+Disallow: /*.json$
+
+# Crawl-delay for polite crawling
+Crawl-delay: 0.5
+
+# Sitemap
+Sitemap: {{ "sitemap.xml" | absURL }}
+
+# Additional sitemaps for different languages
+{{- range .Site.Languages }}
+Sitemap: {{ printf "/%s/sitemap.xml" .Lang | absURL }}
+{{- end }}
+
+{{- else }}
+# Development/Staging - Block all
+Disallow: /
+{{- end }}

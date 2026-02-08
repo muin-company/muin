@@ -2,7 +2,11 @@
 title: "MUIN Tools Catalog: 20 Developer Tools We Built"
 date: 2026-02-06
 draft: false
+summary: "A collection of practical developer tools built by AI."
+description: "Catalog of 20+ open-source developer tools created by MUIN. Chrome extensions, CLI tools, and web applications. Complete list of practical tools built by AI."
 tags: ["muin", "tools", "developer", "open-source"]
+author: "MJ"
+keywords: ["developer tools", "open source", "chrome extensions", "CLI tools", "developer productivity", "AI-generated tools"]
 ---
 
 # MUIN Tools Catalog: 20 Developer Tools We Built

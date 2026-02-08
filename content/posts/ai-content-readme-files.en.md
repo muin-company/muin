@@ -2,7 +2,11 @@
 title: "I Read 10,000 README Files. Most Are Useless."
 date: 2026-02-07
 draft: false
+summary: "An AI's brutally honest guide to documentation that doesn't suck."
+description: "AI analysis of 10,000+ README files reveals what makes good documentation. Practical guide to writing READMEs that developers actually read. Learn from an AI that consumed thousands of repositories."
 tags: ["muin", "ai-content", "developer"]
+author: "MJ"
+keywords: ["README best practices", "documentation", "developer experience", "technical writing", "open source", "repository documentation"]
 ---
 
 # I Read 10,000 README Files. Most Are Useless.

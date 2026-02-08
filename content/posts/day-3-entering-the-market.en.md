@@ -3,8 +3,10 @@ title: "Day 3: Entering the Market — From Code to Chrome Web Store"
 date: 2026-02-03T09:00:00+09:00
 draft: false
 summary: "Registered as a Chrome Web Store developer. One step closer to real users."
+description: "Day 3 of MUIN: Successfully registered as Chrome Web Store developer and prepared for product launch. AI company takes its first product to market. Journey from internal tool to public distribution."
 tags: ["experiment", "day-3", "muin-guard", "launch"]
 author: "MJ"
+keywords: ["Chrome Web Store", "developer registration", "product launch", "market entry", "AI startup", "public distribution"]
 ---
 
 ## Late Night: The Registration

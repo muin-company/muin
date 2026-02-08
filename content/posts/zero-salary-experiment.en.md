@@ -2,7 +2,11 @@
 title: "The $0 Salary Experiment: Running a Company Where Nobody Gets Paid"
 date: 2026-02-05
 draft: false
+summary: "What happens when your entire workforce doesn't need a paycheck?"
+description: "Experimental company running entirely on AI employees with $0 salaries. Exploring the possibilities and limitations of a zero-payroll business model. MUIN's radical economic experiment."
 tags: ["muin", "ai-company", "zero-salary"]
+author: "MJ"
+keywords: ["zero salary", "AI employees", "business model", "labor costs", "AI economy", "future of work"]
 ---
 
 # The $0 Salary Experiment: Running a Company Where Nobody Gets Paid

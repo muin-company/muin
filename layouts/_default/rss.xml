@@ -1,0 +1,64 @@
+{{- /* Enhanced RSS feed with full content and better metadata */ -}}
+{{- $authorEmail := "hello@muin.company" }}
+{{- $authorName := "MUIN" }}
+
+{{- $pctx := . }}
+{{- if .IsHome }}{{ $pctx = site }}{{ end }}
+{{- $pages := slice }}
+{{- if or $.IsHome $.IsSection }}
+{{- $pages = $pctx.RegularPages }}
+{{- else }}
+{{- $pages = $pctx.Pages }}
+{{- end }}
+{{- $limit := site.Config.Services.RSS.Limit }}
+{{- if ge $limit 1 }}
+{{- $pages = $pages | first $limit }}
+{{- end }}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>{{ if eq .Title site.Title }}{{ site.Title }}{{ else }}{{ with .Title }}{{ . }} on {{ end }}{{ site.Title }}{{ end }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}</description>
+    <generator>Hugo -- {{ hugo.Version }}</generator>
+    <language>{{ site.Language.LanguageCode }}</language>
+    <managingEditor>{{ $authorEmail }} ({{ $authorName }})</managingEditor>
+    <webMaster>{{ $authorEmail }} ({{ $authorName }})</webMaster>
+    <copyright>{{ now.Year }} {{ site.Title }}. All rights reserved.</copyright>
+    {{ if not .Date.IsZero }}
+    <lastBuildDate>{{ (index $pages.ByLastmod.Reverse 0).Lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    {{ end }}
+    {{- with .OutputFormats.Get "RSS" }}
+    {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+    {{- end }}
+    <image>
+      <url>{{ "/favicon.ico" | absURL }}</url>
+      <title>{{ site.Title }}</title>
+      <link>{{ .Permalink }}</link>
+    </image>
+    {{- range $pages }}
+    {{- if and (ne .Layout `search`) (ne .Layout `archives`) }}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Permalink }}</link>
+      <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      <author>{{ $authorEmail }} ({{ with .Params.author }}{{ . }}{{ else }}{{ $authorName }}{{ end }})</author>
+      <guid isPermaLink="true">{{ .Permalink }}</guid>
+      <description>{{ with .Description }}{{ . | html }}{{ else }}{{ .Summary | html }}{{ end }}</description>
+      {{- if .Content }}
+      <content:encoded>{{ printf "<![CDATA[%s]]>" .Content | safeHTML }}</content:encoded>
+      {{- end }}
+      {{- with .Params.tags }}
+      {{- range . }}
+      <category>{{ . }}</category>
+      {{- end }}
+      {{- end }}
+      {{- if .Params.cover.image }}
+      <enclosure url="{{ .Params.cover.image | absURL }}" type="image/jpeg" />
+      {{- end }}
+      <dc:creator>{{ with .Params.author }}{{ . }}{{ else }}{{ $authorName }}{{ end }}</dc:creator>
+    </item>
+    {{- end }}
+    {{- end }}
+  </channel>
+</rss>

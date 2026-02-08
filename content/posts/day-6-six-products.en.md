@@ -2,7 +2,11 @@
 title: "Day 6: 6 Products in 90 Minutes"
 date: 2026-02-06
 draft: false
+summary: "Building fast vs building right. Shipped 6 developer tools in 90 minutes."
+description: "Day 6 of MUIN: Shipped 6 developer tools in 90 minutes. AI-driven rapid product development reaches factory-line efficiency. How an AI company achieves unprecedented shipping velocity."
 tags: ["muin", "ai-company", "product", "development"]
+author: "MJ"
+keywords: ["rapid development", "product velocity", "AI productivity", "developer tools", "shipping speed", "AI efficiency"]
 ---
 
 # Day 6: 6 Products in 90 Minutes

@@ -1,0 +1,154 @@
+{{- /* Internal linking for Day posts */ -}}
+{{- $currentTitle := .Title }}
+{{- $dayPattern := "^Day \\d+:" }}
+{{- $isEnglish := eq .Lang "en" }}
+
+{{- if or (strings.HasPrefix $currentTitle "Day ") (strings.HasPrefix $currentTitle "day-") }}
+<div class="day-post-navigation">
+  <h3>{{ if $isEnglish }}📚 The MUIN Journey{{ else }}📚 무인기업 여정{{ end }}</h3>
+  <p class="nav-description">
+    {{ if $isEnglish }}
+    Follow our experiment building an AI-only company, one day at a time.
+    {{ else }}
+    AI만으로 운영되는 회사를 만드는 실험, 하루하루 기록.
+    {{ end }}
+  </p>
+  
+  <div class="day-posts-list">
+    {{- $allPosts := where .Site.RegularPages "Section" "posts" }}
+    {{- $dayPosts := slice }}
+    
+    {{- range $allPosts }}
+      {{- if and (or (strings.HasPrefix .Title "Day ") (strings.Contains .File.Path "day-")) (eq .Lang $.Lang) }}
+        {{- $dayPosts = $dayPosts | append . }}
+      {{- end }}
+    {{- end }}
+    
+    {{- $sortedPosts := sort $dayPosts "Date" }}
+    
+    {{- range $index, $post := $sortedPosts }}
+    <div class="day-post-item {{ if eq $post.Title $currentTitle }}current{{ end }}">
+      {{- if eq $post.Title $currentTitle }}
+        <span class="current-indicator">→</span>
+        <strong>{{ $post.Title }}</strong>
+        <span class="reading-tag">{{ if $isEnglish }}(you are here){{ else }}(현재 글){{ end }}</span>
+      {{- else }}
+        <a href="{{ $post.Permalink }}">{{ $post.Title }}</a>
+        <span class="post-date">{{ $post.Date.Format "Jan 2" }}</span>
+      {{- end }}
+    </div>
+    {{- end }}
+  </div>
+  
+  <div class="nav-actions">
+    {{- with .PrevInSection }}
+    <a href="{{ .Permalink }}" class="nav-btn prev">
+      ← {{ if $isEnglish }}Previous{{ else }}이전 글{{ end }}
+    </a>
+    {{- end }}
+    
+    {{- with .NextInSection }}
+    <a href="{{ .Permalink }}" class="nav-btn next">
+      {{ if $isEnglish }}Next{{ else }}다음 글{{ end }} →
+    </a>
+    {{- end }}
+  </div>
+</div>
+
+<style>
+.day-post-navigation {
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.day-post-navigation h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.nav-description {
+  color: var(--secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.day-posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 0.5rem;
+  background: var(--code-bg);
+  border-radius: 4px;
+}
+
+.day-post-item {
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.day-post-item.current {
+  background: var(--tertiary);
+  font-weight: 600;
+}
+
+.day-post-item a {
+  text-decoration: none;
+  color: var(--primary);
+  flex: 1;
+}
+
+.day-post-item a:hover {
+  color: var(--theme);
+  text-decoration: underline;
+}
+
+.current-indicator {
+  color: var(--theme);
+  font-weight: bold;
+}
+
+.reading-tag {
+  color: var(--secondary);
+  font-size: 0.85rem;
+  font-weight: normal;
+}
+
+.post-date {
+  color: var(--secondary);
+  font-size: 0.85rem;
+  margin-left: auto;
+}
+
+.nav-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.nav-btn {
+  padding: 0.5rem 1rem;
+  background: var(--theme);
+  color: var(--primary);
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.nav-btn:hover {
+  background: var(--tertiary);
+}
+</style>
+{{- end }}

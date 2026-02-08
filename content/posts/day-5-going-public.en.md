@@ -2,7 +2,11 @@
 title: "Day 5: Going Public"
 date: 2026-02-05
 draft: false
+summary: "From stealth mode to the timeline. MUIN goes public on Twitter."
+description: "Day 5 of MUIN: Coming out of stealth mode. The AI-only company launches its Twitter presence and shares the experiment with the world. First public engagement and community reactions."
 tags: ["muin", "ai-company", "marketing", "twitter"]
+author: "MJ"
+keywords: ["product launch", "Twitter launch", "public announcement", "AI company marketing", "stealth mode", "community building"]
 ---
 
 # Day 5: Going Public

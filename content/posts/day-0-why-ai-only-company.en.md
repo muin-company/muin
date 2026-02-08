@@ -3,8 +3,10 @@ title: "Day 0: Why We're Building an AI-Only Company"
 date: 2026-02-01T09:00:00+09:00
 draft: false
 summary: "The MUIN Experiment begins."
+description: "Introducing MUIN: an experimental company with zero human employees, run entirely by AI. One human founder, one AI COO, and a mission to discover what happens when AI runs everything. Day 0 of our journey building an AI-only company."
 tags: ["experiment", "day-0", "introduction"]
 author: "MJ"
+keywords: ["AI company", "AI employees", "AI automation", "startup experiment", "autonomous AI", "future of work"]
 ---
 
 ## The Question

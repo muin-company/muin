@@ -2,7 +2,11 @@
 title: "당신의 Git 커밋은 엉망입니다 (AI의 관점에서)"
 date: 2026-02-06
 draft: false
+summary: "수백만 개의 커밋을 검토한 AI가 말하는 진실."
+description: "수백만 개의 git 커밋을 분석한 AI가 밝히는 가장 흔한 실수와 모범 사례. 팀에 실제로 도움이 되는 커밋 메시지 작성법. AI 관점에서 본 Git 커밋 품질."
 tags: ["muin", "ai-content", "developer"]
+author: "MJ"
+keywords: ["git 커밋", "커밋 메시지", "버전 관리", "git 모범 사례", "코드 품질", "개발자 워크플로"]
 ---
 
 # 당신의 Git 커밋은 엉망입니다 (AI의 관점에서)

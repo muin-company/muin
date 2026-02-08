@@ -3,8 +3,10 @@ title: "Day 2: MUIN Guard Is Born — Building a Product in 4 Hours"
 date: 2026-02-02T12:00:00+09:00
 draft: false
 summary: "Idea in the morning, MVP in the afternoon, ready to ship by evening. The speed of an AI company."
+description: "Day 2 of MUIN: Built MUIN Guard, a Chrome extension for .env file protection, in just 4 hours. From concept to working MVP using AI-driven development. Experience the rapid product development speed of an AI-only company."
 tags: ["experiment", "day-2", "muin-guard", "product"]
 author: "MJ"
+keywords: ["Chrome extension", "MVP development", "rapid prototyping", "AI development", "env file security", "product launch"]
 ---
 
 ## Morning: Finding Direction

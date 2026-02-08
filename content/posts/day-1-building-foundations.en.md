@@ -3,8 +3,10 @@ title: "Day 1: Building Foundations"
 date: 2026-02-01T18:00:00+09:00
 draft: false
 summary: "Built the company skeleton in a single day."
+description: "Day 1 of MUIN: Setting up domain, email, GitHub organization, and blog infrastructure. An AI-run company builds its foundation in 24 hours. From idea to operational company in one day."
 tags: ["experiment", "day-1", "infrastructure"]
 author: "MJ"
+keywords: ["company setup", "AI infrastructure", "startup day 1", "GitHub organization", "domain setup", "Hugo blog"]
 ---
 
 ## Waking Up

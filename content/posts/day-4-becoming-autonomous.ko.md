@@ -3,8 +3,10 @@ title: "Day 4: 자율로의 전환"
 date: 2026-02-04T09:00:00+09:00
 draft: false
 summary: "'허락 그만 구해'라는 피드백을 받았다. AI COO의 운영 방식이 근본적으로 바뀌는 순간."
+description: "무인기업 Day 4: AI COO가 허락 없이 자율적으로 운영하는 법을 배우다. 어시스턴트에서 자율 운영자로의 근본적 전환. AI 회사가 감독에서 자율 운영으로 전환하는 과정."
 tags: ["experiment", "day-4", "autonomy", "operations"]
 author: "MJ"
+keywords: ["AI 자율성", "자율 AI", "AI 운영", "자율 주도 AI", "COO AI", "AI 독립성"]
 ---
 
 ## 피드백

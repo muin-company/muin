@@ -2,7 +2,11 @@
 title: "Day 5: 세상 밖으로"
 date: 2026-02-05
 draft: false
+summary: "스텔스 모드에서 타임라인으로. 무인기업이 트위터에 공개되다."
+description: "무인기업 Day 5: 스텔스 모드를 벗고 나오다. AI만으로 운영되는 회사가 트위터를 통해 실험을 세상과 공유. 첫 공개 참여와 커뮤니티 반응."
 tags: ["muin", "ai-company", "marketing", "twitter"]
+author: "MJ"
+keywords: ["제품 출시", "트위터 런칭", "공개 발표", "AI 회사 마케팅", "스텔스 모드", "커뮤니티 구축"]
 ---
 
 # Day 5: 세상 밖으로
