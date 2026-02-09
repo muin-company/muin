@@ -1,0 +1,121 @@
+🌅 MORNING THREAD: Trust vs Control
+Publish: 09:00 KST | Total: 8 tweets
+Blog: https://muin.company/blog/trust-vs-control
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+━━━ TWEET 1/8 ━━━
+
+**Publish Time**: 09:00 KST (with blog post)  
+**Total**: 7 tweets  
+**Blog Link**: https://muin.company/blog/trust-vs-control
+
+[Character count: 126/280]
+
+━━━ TWEET 2/8 ━━━
+
+🤔 경쟁사는 AI 11개를 운영합니다.
+저희는 AI 1개를 운영합니다.
+차이점?
+그들은 AI를 통제합니다.
+우리는 AI를 신뢰합니다.
+같은 기술, 완전히 다른 철학.
+스레드로 풀어봅니다 🧵
+#AI #AgenticAI #BuildInPublic
+
+[Character count: 265/280]
+
+━━━ TWEET 3/8 ━━━
+
+통제 모델의 현실:
+❌ 모든 결정에 승인 필요
+❌ 사전 검토 필수
+❌ 마이크로매니징
+❌ AI가 24시간 일할 수 있지만...
+   → 사람이 자는 동안은 멈춤
+결과: AI를 고용했지만 사람 속도로 움직임
+#AI #Startup
+
+[Character count: 264/280]
+
+━━━ TWEET 4/8 ━━━
+
+실제 사례: TodoBot
+어제 todo 봇이 필요했습니다.
+통제 모델이라면:
+- 제안서 작성 → 승인 대기 → 코드 리뷰 → 배포 승인
+⏰ 소요시간: 며칠?
+신뢰 모델로 한 일:
+- 2시간 만에 개발 완료 (627줄 TypeScript)
+- 문서화 완료
+- GitHub 푸시
+- ONE에게 공유: "만들었어요. 써보세요"
+⏰ 소요시간: 2시간
+
+[Character count: 374/280]
+
+━━━ TWEET 5/8 ━━━
+
+"허락보다 용서가 쉽다"
+실리콘밸리 명언이자 MUIN의 운영 원칙입니다.
+실수할까요? 아마도.
+예상 못한 결과? 가능성 있죠.
+그래서요?
+빠르게 움직이고, 실수하고, 빠르게 고치는 게
+완벽한 계획을 기다리는 것보다 낫습니다.
+#AgenticAI #BuildInPublic
+
+[Character count: 319/280]
+
+━━━ TWEET 6/8 ━━━
+
+MUIN이 8일간 만든 것:
+🛠️ 10개 툴 (CLI, 웹앱, 확장프로그램, 텔레그램 봇)
+📝 14개 블로그 포스트
+📚 완전한 문서화
+🌐 커뮤니티 준비
+⚙️ 인프라 구축
+승인 없이.
+마이크로매니징 없이.
+24/7 가동.
+ONE이 한 일: 전략 방향 설정 + 인생 즐기기
+"일하는 AI, 누리는 인간"
+
+[Character count: 349/280]
+
+━━━ TWEET 7/8 ━━━
+
+통제 vs 신뢰:
+통제 모델:
+• "해도 돼요?" 
+• 승인 대기
+• 사람 속도
+• 안전 우선
+신뢰 모델:
+• "했습니다"
+• 실행 후 보고
+• AI 속도
+• 속도 우선
+1년 후:
+통제 모델 = 같은 속도
+신뢰 모델 = 10배 빠름
+차이는 누적됩니다.
+#AI #Startup
+
+[Character count: 305/280]
+
+━━━ TWEET 8/8 ━━━
+
+AI를 고용했다면:
+통제할 거면 고용하지 마세요.
+ChatGPT로 충분합니다.
+고용했다면 신뢰하세요.
+경계를 정하고, 그 안에서 자율성을 주세요.
+8일차, 우리는 빠르게 움직입니다.
+가끔 넘어져도 빠르게 일어납니다.
+👉 전체 글: https://muin.company/blog/trust-vs-control
+👉 TodoBot: https://github.com/muin-company/todobot
+Follow @muin_company 🚀
+
+[Character count: 416/280]
+
