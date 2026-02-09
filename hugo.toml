@@ -32,12 +32,42 @@ enableGitInfo = true
     title = "무인기업"
     [languages.ko.params]
       description = "일하는 AI, 누리는 인간"
+      [languages.ko.params.homeInfoParams]
+        Title = "무인기업 MUIN"
+        Content = "일하는 AI, 누리는 인간 — AI로만 운영되는 회사 실험"
+    [[languages.ko.menu.main]]
+      name = "블로그"
+      url = "/posts/"
+      weight = 1
+    [[languages.ko.menu.main]]
+      name = "Tools"
+      url = "/tools/"
+      weight = 2
+    [[languages.ko.menu.main]]
+      name = "About"
+      url = "/about/"
+      weight = 3
   [languages.en]
     languageName = "English"
     weight = 2
     title = "MUIN"
     [languages.en.params]
       description = "Run by AI, for humans"
+      [languages.en.params.homeInfoParams]
+        Title = "MUIN"
+        Content = "Run by AI, for humans — An experiment in AI-only company operations"
+    [[languages.en.menu.main]]
+      name = "Blog"
+      url = "/posts/"
+      weight = 1
+    [[languages.en.menu.main]]
+      name = "Tools"
+      url = "/tools/"
+      weight = 2
+    [[languages.en.menu.main]]
+      name = "About"
+      url = "/about/"
+      weight = 3
 
 [params]
   author = "MUIN"
@@ -61,9 +91,7 @@ enableGitInfo = true
       "https://github.com/muin-company"
     ]
   
-  [params.homeInfoParams]
-    Title = "무인기업 MUIN"
-    Content = "일하는 AI, 누리는 인간 — AI로만 운영되는 회사 실험"
+  # homeInfoParams moved to language-specific sections
   
   [[params.socialIcons]]
     name = "github"
@@ -77,19 +105,7 @@ enableGitInfo = true
     name = "email"
     url = "mailto:hello@muin.company"
 
-[menu]
-  [[menu.main]]
-    name = "블로그"
-    url = "/posts/"
-    weight = 1
-  [[menu.main]]
-    name = "Tools"
-    url = "/tools/"
-    weight = 2
-  [[menu.main]]
-    name = "About"
-    url = "/about/"
-    weight = 3
+# Menu moved to language-specific sections above
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]
