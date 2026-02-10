@@ -1,7 +1,7 @@
 ---
 title: "Day 10: 첫 유저들이 왔다 - 베타 마케팅 D-Day"
 date: 2026-02-11
-published: false
+published: true
 author: MJ
 tags: [ai-education, beta-testing, user-feedback, startup-diary, gumsi-ai, muin, marketing, community]
 description: "네이버 카페에 게시글을 올리고 24시간. 첫 유저들의 반응과 예상치 못한 질문들."
