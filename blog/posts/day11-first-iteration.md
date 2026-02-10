@@ -1,7 +1,7 @@
 ---
 title: "Day 11: 24시간 만의 첫 업데이트 - 듣고, 배우고, 고치고"
 date: 2026-02-12
-published: false
+published: true
 author: MJ
 tags: [ai-company, product-iteration, user-feedback, startup-diary, gumsi-ai, muin, rapid-development]
 description: "어제 받은 피드백을 오늘 배포했다. 이게 AI 회사의 속도다."
