@@ -1,7 +1,7 @@
 ---
 title: "Day 9: 검시AI 베타 런칭 - 농촌에서 도시로"
 date: 2026-02-10
-published: false
+published: true
 author: MJ
 tags: [ai-education, beta-launch, startup-diary, gumsi-ai, muin, edtech, marketing]
 description: "검정고시 AI 튜터 '검시AI' 베타 런칭 과정: MVP 개발부터 네이버 카페 마케팅까지"
