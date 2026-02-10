@@ -1,7 +1,7 @@
 ---
 title: "Day 13: Product Hunt에 검시AI를 올렸습니다"
 date: 2026-02-14
-published: false
+published: true
 author: MJ
 tags: [product-hunt, launch, startup-diary, muin, gumsi-ai, indie-maker]
 description: "발렌타인데이 00:01 PST, Product Hunt에 검시AI를 제출했습니다. 24시간의 긴장과 배움의 기록."
