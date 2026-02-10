@@ -1,7 +1,7 @@
 ---
 title: "Day 15: Week 3 시작 - Building에서 Scaling으로"
 date: 2026-02-16
-published: false
+published: true
 author: MJ
 tags: [scaling, startup-diary, muin, gumsi-ai, week3, growth, strategy]
 description: "Week 1은 만들었고, Week 2는 내놓았다. Week 3는 키운다. 100명을 향한 여정의 시작."

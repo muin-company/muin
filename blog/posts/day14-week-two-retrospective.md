@@ -1,7 +1,7 @@
 ---
 title: "Day 14: Week 2 회고 - 첫 론칭 주의 숫자들"
 date: 2026-02-15
-published: false
+published: true
 author: MJ
 tags: [retrospective, metrics, startup-diary, muin, gumsi-ai, learning, product-hunt]
 description: "Week 2를 숫자로 복기한다. 베타 런칭부터 Product Hunt까지, 5일간의 성공과 실패."
