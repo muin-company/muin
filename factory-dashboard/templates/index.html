@@ -9,10 +9,11 @@
     <link href="/static/css/style.css" rel="stylesheet">
 </head>
 <body class="bg-dark text-light">
-    <nav class="navbar navbar-dark bg-black border-bottom border-secondary">
+    <nav class="navbar navbar-dark bg-black border-bottom border-secondary sticky-top">
         <div class="container-fluid">
             <span class="navbar-brand mb-0 h1">
                 <i class="bi bi-robot"></i> Factory Dashboard
+                <span class="badge bg-info ms-2">v2.0</span>
             </span>
             <span class="navbar-text">
                 <span id="status-dot" class="status-dot bg-success"></span>
@@ -24,35 +25,57 @@
     <div class="container-fluid py-4">
         <!-- Stats Cards -->
         <div class="row g-3 mb-4">
-            <div class="col-md-3 col-6">
-                <div class="card bg-success bg-opacity-25 border-success">
-                    <div class="card-body text-center">
+            <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                <div class="card bg-success bg-opacity-25 border-success stat-card">
+                    <div class="card-body text-center p-3">
+                        <i class="bi bi-lightning-charge-fill stat-icon text-success"></i>
                         <h2 id="stat-active" class="mb-0">-</h2>
                         <small class="text-success">Active</small>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-6">
-                <div class="card bg-warning bg-opacity-25 border-warning">
-                    <div class="card-body text-center">
+            <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                <div class="card bg-warning bg-opacity-25 border-warning stat-card">
+                    <div class="card-body text-center p-3">
+                        <i class="bi bi-hourglass-split stat-icon text-warning"></i>
                         <h2 id="stat-idle" class="mb-0">-</h2>
                         <small class="text-warning">Idle</small>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-6">
-                <div class="card bg-secondary bg-opacity-25 border-secondary">
-                    <div class="card-body text-center">
+            <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                <div class="card bg-secondary bg-opacity-25 border-secondary stat-card">
+                    <div class="card-body text-center p-3">
+                        <i class="bi bi-moon-stars-fill stat-icon text-secondary"></i>
                         <h2 id="stat-stale" class="mb-0">-</h2>
                         <small class="text-secondary">Stale</small>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-6">
-                <div class="card bg-info bg-opacity-25 border-info">
-                    <div class="card-body text-center">
+            <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                <div class="card bg-info bg-opacity-25 border-info stat-card">
+                    <div class="card-body text-center p-3">
+                        <i class="bi bi-collection-fill stat-icon text-info"></i>
                         <h2 id="stat-total" class="mb-0">-</h2>
                         <small class="text-info">Total</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                <div class="card bg-primary bg-opacity-25 border-primary stat-card">
+                    <div class="card-body text-center p-3">
+                        <i class="bi bi-coin stat-icon text-primary"></i>
+                        <h3 id="stat-cost" class="mb-0">-</h3>
+                        <small class="text-primary">Cost (USD)</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                <div class="card bg-purple bg-opacity-25 border-purple stat-card">
+                    <div class="card-body text-center p-3">
+                        <i class="bi bi-cpu-fill stat-icon text-purple"></i>
+                        <h3 id="stat-tokens" class="mb-0">-</h3>
+                        <small class="text-purple">Total Tokens</small>
                     </div>
                 </div>
             </div>
@@ -60,20 +83,99 @@
 
         <!-- Session Type Badges -->
         <div class="mb-4 text-center">
-            <span class="badge bg-primary me-2"><i class="bi bi-person-fill"></i> Main: <span id="stat-main">0</span></span>
-            <span class="badge bg-purple me-2"><i class="bi bi-diagram-3"></i> Subagents: <span id="stat-subagent">0</span></span>
-            <span class="badge bg-secondary"><i class="bi bi-clock-history"></i> Cron: <span id="stat-cron">0</span></span>
+            <span class="badge bg-primary me-2 px-3 py-2">
+                <i class="bi bi-person-fill"></i> Main: <strong id="stat-main">0</strong>
+            </span>
+            <span class="badge bg-purple me-2 px-3 py-2">
+                <i class="bi bi-diagram-3"></i> Subagents: <strong id="stat-subagent">0</strong>
+            </span>
+            <span class="badge bg-secondary px-3 py-2">
+                <i class="bi bi-clock-history"></i> Cron: <strong id="stat-cron">0</strong>
+            </span>
+        </div>
+
+        <!-- Task Queue Section -->
+        <div class="card bg-dark border-warning mb-4" id="task-queue-section" style="display: none;">
+            <div class="card-header bg-warning bg-opacity-10 border-warning">
+                <h5 class="mb-0">
+                    <i class="bi bi-list-task"></i> Active Task Queue
+                    <span class="badge bg-warning text-dark ms-2" id="queue-count">0</span>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div id="task-queue-container" class="task-queue">
+                    <!-- Task items will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Token Usage Section -->
+        <div class="card bg-dark border-info mb-4">
+            <div class="card-header bg-info bg-opacity-10 border-info">
+                <h5 class="mb-0">
+                    <i class="bi bi-bar-chart-fill"></i> Token Usage & Cost
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <div class="p-3 bg-success bg-opacity-10 rounded text-center">
+                            <i class="bi bi-arrow-down-circle text-success"></i>
+                            <h4 id="token-input" class="mb-0 text-success">-</h4>
+                            <small class="text-muted">Input Tokens</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 bg-warning bg-opacity-10 rounded text-center">
+                            <i class="bi bi-arrow-up-circle text-warning"></i>
+                            <h4 id="token-output" class="mb-0 text-warning">-</h4>
+                            <small class="text-muted">Output Tokens</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 bg-info bg-opacity-10 rounded text-center">
+                            <i class="bi bi-memory text-info"></i>
+                            <h4 id="token-context" class="mb-0 text-info">-</h4>
+                            <small class="text-muted">Max Context</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 bg-danger bg-opacity-10 rounded text-center">
+                            <i class="bi bi-cash-coin text-danger"></i>
+                            <h4 id="token-cost-detail" class="mb-0 text-danger">-</h4>
+                            <small class="text-muted">Estimated Cost</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Sessions Grid -->
-        <div id="sessions-container" class="row g-3">
-            <div class="col-12 text-center py-5">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
+        <div class="card bg-dark border-secondary mb-4">
+            <div class="card-header bg-secondary bg-opacity-10 border-secondary">
+                <h5 class="mb-0">
+                    <i class="bi bi-grid-3x3-gap-fill"></i> Active Sessions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div id="sessions-container" class="row g-3">
+                    <div class="col-12 text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <footer class="text-center text-muted py-4">
+        <small>
+            Factory Dashboard v2.0 | 
+            <span id="footer-refresh">Auto-refresh: 10s</span> | 
+            Press <kbd>R</kbd> to refresh manually
+        </small>
+    </footer>
 
     <script src="/static/js/dashboard.js"></script>
 </body>

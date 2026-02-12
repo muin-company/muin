@@ -1,12 +1,14 @@
-// Factory Dashboard - Real-time Session Monitoring
+// Factory Dashboard v2.0 - Real-time Session Monitoring with Task Queue & Cost Tracking
 
 const REFRESH_INTERVAL = 10000; // 10 seconds
 let lastFetchTime = null;
+let currentData = null;
 
 async function fetchSessions() {
     try {
         const response = await fetch('/api/sessions');
         const data = await response.json();
+        currentData = data;
         updateDashboard(data);
         updateStatus(true);
     } catch (error) {
@@ -16,7 +18,14 @@ async function fetchSessions() {
 }
 
 function updateDashboard(data) {
-    // Update stats
+    updateStats(data);
+    updateTokenStats(data);
+    updateTaskQueue(data);
+    updateSessionsGrid(data);
+}
+
+function updateStats(data) {
+    // Basic stats
     document.getElementById('stat-active').textContent = data.stats.active;
     document.getElementById('stat-idle').textContent = data.stats.idle;
     document.getElementById('stat-stale').textContent = data.stats.stale;
@@ -25,7 +34,72 @@ function updateDashboard(data) {
     document.getElementById('stat-subagent').textContent = data.stats.subagent;
     document.getElementById('stat-cron').textContent = data.stats.cron;
 
-    // Update sessions grid
+    // Cost
+    const cost = data.tokenStats.totalCost;
+    const costEl = document.getElementById('stat-cost');
+    costEl.textContent = `$${cost.toFixed(4)}`;
+    
+    // Color code based on cost
+    if (cost > 1.0) {
+        costEl.className = 'mb-0 cost-high';
+    } else if (cost > 0.1) {
+        costEl.className = 'mb-0 cost-medium';
+    } else {
+        costEl.className = 'mb-0 cost-low';
+    }
+
+    // Total tokens
+    const totalTokens = data.tokenStats.totalInput + data.tokenStats.totalOutput;
+    document.getElementById('stat-tokens').textContent = formatTokens(totalTokens);
+}
+
+function updateTokenStats(data) {
+    const ts = data.tokenStats;
+    
+    document.getElementById('token-input').textContent = formatTokens(ts.totalInput);
+    document.getElementById('token-output').textContent = formatTokens(ts.totalOutput);
+    document.getElementById('token-context').textContent = formatTokens(ts.totalContext);
+    document.getElementById('token-cost-detail').textContent = `$${ts.totalCost.toFixed(4)}`;
+}
+
+function updateTaskQueue(data) {
+    const queue = data.taskQueue || [];
+    const queueSection = document.getElementById('task-queue-section');
+    const queueContainer = document.getElementById('task-queue-container');
+    const queueCount = document.getElementById('queue-count');
+
+    if (queue.length === 0) {
+        queueSection.style.display = 'none';
+        return;
+    }
+
+    queueSection.style.display = 'block';
+    queueCount.textContent = queue.length;
+
+    queueContainer.innerHTML = queue.map(task => createTaskItem(task)).join('');
+}
+
+function createTaskItem(task) {
+    const statusIcon = task.status === 'active' 
+        ? '<i class="bi bi-lightning-charge-fill text-success task-icon"></i>'
+        : '<i class="bi bi-hourglass-split text-warning task-icon"></i>';
+    
+    const itemClass = task.status === 'active' ? 'task-item task-item-active' : 'task-item';
+
+    return `
+        <div class="${itemClass}">
+            ${statusIcon}
+            <div class="task-name">${escapeHtml(task.taskName)}</div>
+            <div class="task-meta">
+                <span><i class="bi bi-clock"></i> ${task.ageFormatted}</span>
+                <span><i class="bi bi-cpu"></i> ${escapeHtml(task.model)}</span>
+                <span><i class="bi bi-hash"></i> ${formatTokens(task.tokens)}</span>
+            </div>
+        </div>
+    `;
+}
+
+function updateSessionsGrid(data) {
     const container = document.getElementById('sessions-container');
     
     if (data.sessions.length === 0) {
@@ -75,13 +149,26 @@ function createSessionCard(session) {
     const typeColor = typeColors[session.sessionType] || typeColors.unknown;
     const statusColor = statusColors[session.status] || 'secondary';
 
-    // Extract short name from key
-    const keyParts = session.key.split(':');
-    const shortName = keyParts.slice(-1)[0].substring(0, 8);
-
     // Format tokens
-    const tokens = session.totalTokens 
-        ? `${(session.totalTokens / 1000).toFixed(1)}k tokens`
+    const inputTokens = session.inputTokens || 0;
+    const outputTokens = session.outputTokens || 0;
+    const totalTokens = session.totalTokens || 0;
+    const contextTokens = session.contextTokens || 0;
+    const cost = session.cost || 0;
+
+    const tokenInfo = totalTokens 
+        ? `
+            <div class="mt-2 pt-2 border-top border-secondary">
+                <small class="text-muted d-block">
+                    <i class="bi bi-arrow-down-circle text-success"></i> In: ${formatTokens(inputTokens)} &nbsp;
+                    <i class="bi bi-arrow-up-circle text-warning"></i> Out: ${formatTokens(outputTokens)}
+                </small>
+                <small class="text-muted d-block mt-1">
+                    <i class="bi bi-collection"></i> Total: ${formatTokens(totalTokens)} &nbsp;
+                    <i class="bi bi-cash-coin text-danger"></i> Cost: $${cost.toFixed(4)}
+                </small>
+            </div>
+        `
         : '';
 
     return `
@@ -99,17 +186,35 @@ function createSessionCard(session) {
                         </div>
                         <small class="text-muted">${session.ageFormatted}</small>
                     </div>
-                    <p class="session-key mb-2" title="${session.key}">${session.key}</p>
+                    <div class="session-key mb-2" title="${escapeHtml(session.key)}">
+                        ${escapeHtml(session.key)}
+                    </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <span class="session-model text-info">
-                            <i class="bi bi-cpu"></i> ${session.model || 'unknown'}
+                            <i class="bi bi-cpu"></i> ${escapeHtml(session.model || 'unknown')}
                         </span>
-                        <small class="text-muted">${tokens}</small>
+                        <small class="text-muted">
+                            <i class="bi bi-memory"></i> ${formatTokens(contextTokens)}
+                        </small>
                     </div>
+                    ${tokenInfo}
                 </div>
             </div>
         </div>
     `;
+}
+
+function formatTokens(tokens) {
+    if (!tokens) return '0';
+    if (tokens < 1000) return tokens.toString();
+    if (tokens < 1000000) return (tokens / 1000).toFixed(1) + 'k';
+    return (tokens / 1000000).toFixed(2) + 'M';
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }
 
 function updateStatus(connected) {
@@ -120,19 +225,36 @@ function updateStatus(connected) {
         dot.className = 'status-dot bg-success';
         const now = new Date();
         text.textContent = `Updated ${now.toLocaleTimeString()}`;
+        lastFetchTime = now;
     } else {
         dot.className = 'status-dot bg-danger';
         text.textContent = 'Connection lost';
     }
 }
 
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'r' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        console.log('Manual refresh triggered');
+        fetchSessions();
+        
+        // Visual feedback
+        const statusText = document.getElementById('last-update');
+        const originalText = statusText.textContent;
+        statusText.textContent = 'Refreshing...';
+        setTimeout(() => {
+            if (lastFetchTime) {
+                statusText.textContent = `Updated ${lastFetchTime.toLocaleTimeString()}`;
+            }
+        }, 500);
+    }
+});
+
 // Initial fetch and start polling
+console.log('Factory Dashboard v2.0 initialized');
 fetchSessions();
 setInterval(fetchSessions, REFRESH_INTERVAL);
 
-// Visual feedback for manual refresh
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'r' && !e.ctrlKey && !e.metaKey) {
-        fetchSessions();
-    }
-});
+// Update footer with refresh interval
+document.getElementById('footer-refresh').textContent = `Auto-refresh: ${REFRESH_INTERVAL / 1000}s`;

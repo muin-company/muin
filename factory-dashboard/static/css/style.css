@@ -1,9 +1,11 @@
-/* Factory Dashboard Styles */
+/* Factory Dashboard Styles v2.0 */
 
 body {
     min-height: 100vh;
+    background: linear-gradient(180deg, #0d1117 0%, #161b22 100%);
 }
 
+/* Status dot animation */
 .status-dot {
     display: inline-block;
     width: 10px;
@@ -18,6 +20,25 @@ body {
     50% { opacity: 0.5; }
 }
 
+/* Stat cards */
+.stat-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+}
+
+.stat-icon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+/* Session cards */
 .card {
     transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -35,44 +56,200 @@ body {
     border-color: #6f42c1 !important;
 }
 
+.text-purple {
+    color: #a78bfa !important;
+}
+
 .session-key {
-    font-family: monospace;
-    font-size: 0.75rem;
+    font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+    font-size: 0.7rem;
     word-break: break-all;
     color: #adb5bd;
+    background: rgba(255,255,255,0.05);
+    padding: 0.5rem;
+    border-radius: 4px;
+    line-height: 1.4;
 }
 
 .session-model {
     font-size: 0.8rem;
+    font-weight: 500;
 }
 
 .badge-type {
     font-size: 0.7rem;
     text-transform: uppercase;
+    font-weight: 600;
 }
 
 /* Status-specific styles */
 .session-active {
     border-left: 4px solid #198754 !important;
+    background: linear-gradient(90deg, rgba(25,135,84,0.1) 0%, transparent 100%);
 }
 
 .session-idle {
     border-left: 4px solid #ffc107 !important;
+    background: linear-gradient(90deg, rgba(255,193,7,0.1) 0%, transparent 100%);
 }
 
 .session-stale {
     border-left: 4px solid #6c757d !important;
+    background: linear-gradient(90deg, rgba(108,117,125,0.1) 0%, transparent 100%);
 }
 
-/* Type icons */
-.type-icon {
+/* Task Queue */
+.task-queue {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    border-left: 3px solid #ffc107;
+    transition: all 0.2s;
+}
+
+.task-item:hover {
+    background: rgba(255,255,255,0.08);
+    transform: translateX(4px);
+}
+
+.task-item-active {
+    border-left-color: #198754;
+    animation: taskPulse 2s infinite;
+}
+
+@keyframes taskPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(25,135,84,0.4); }
+    50% { box-shadow: 0 0 0 6px rgba(25,135,84,0); }
+}
+
+.task-icon {
     font-size: 1.5rem;
+    margin-right: 1rem;
     opacity: 0.7;
+}
+
+.task-name {
+    flex: 1;
+    font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.task-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #adb5bd;
+}
+
+/* Token stats */
+.token-stat {
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Badges */
+.badge {
+    font-weight: 600;
+}
+
+/* Footer */
+footer {
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+kbd {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: monospace;
+}
+
+/* Loading state */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .session-key {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
     }
+    
+    .stat-card h2 {
+        font-size: 1.5rem;
+    }
+    
+    .task-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .task-meta {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.session-card {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Cost highlight */
+.cost-high {
+    color: #dc3545 !important;
+    font-weight: bold;
+}
+
+.cost-medium {
+    color: #ffc107 !important;
+}
+
+.cost-low {
+    color: #198754 !important;
 }
