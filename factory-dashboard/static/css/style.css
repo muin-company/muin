@@ -1,0 +1,78 @@
+/* Factory Dashboard Styles */
+
+body {
+    min-height: 100vh;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.session-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.bg-purple {
+    background-color: #6f42c1 !important;
+}
+
+.border-purple {
+    border-color: #6f42c1 !important;
+}
+
+.session-key {
+    font-family: monospace;
+    font-size: 0.75rem;
+    word-break: break-all;
+    color: #adb5bd;
+}
+
+.session-model {
+    font-size: 0.8rem;
+}
+
+.badge-type {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+}
+
+/* Status-specific styles */
+.session-active {
+    border-left: 4px solid #198754 !important;
+}
+
+.session-idle {
+    border-left: 4px solid #ffc107 !important;
+}
+
+.session-stale {
+    border-left: 4px solid #6c757d !important;
+}
+
+/* Type icons */
+.type-icon {
+    font-size: 1.5rem;
+    opacity: 0.7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .session-key {
+        font-size: 0.65rem;
+    }
+}

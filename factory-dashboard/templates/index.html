@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory Dashboard - OpenClaw</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-light">
+    <nav class="navbar navbar-dark bg-black border-bottom border-secondary">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">
+                <i class="bi bi-robot"></i> Factory Dashboard
+            </span>
+            <span class="navbar-text">
+                <span id="status-dot" class="status-dot bg-success"></span>
+                <span id="last-update">Connecting...</span>
+            </span>
+        </div>
+    </nav>
+
+    <div class="container-fluid py-4">
+        <!-- Stats Cards -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-3 col-6">
+                <div class="card bg-success bg-opacity-25 border-success">
+                    <div class="card-body text-center">
+                        <h2 id="stat-active" class="mb-0">-</h2>
+                        <small class="text-success">Active</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card bg-warning bg-opacity-25 border-warning">
+                    <div class="card-body text-center">
+                        <h2 id="stat-idle" class="mb-0">-</h2>
+                        <small class="text-warning">Idle</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card bg-secondary bg-opacity-25 border-secondary">
+                    <div class="card-body text-center">
+                        <h2 id="stat-stale" class="mb-0">-</h2>
+                        <small class="text-secondary">Stale</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="card bg-info bg-opacity-25 border-info">
+                    <div class="card-body text-center">
+                        <h2 id="stat-total" class="mb-0">-</h2>
+                        <small class="text-info">Total</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Session Type Badges -->
+        <div class="mb-4 text-center">
+            <span class="badge bg-primary me-2"><i class="bi bi-person-fill"></i> Main: <span id="stat-main">0</span></span>
+            <span class="badge bg-purple me-2"><i class="bi bi-diagram-3"></i> Subagents: <span id="stat-subagent">0</span></span>
+            <span class="badge bg-secondary"><i class="bi bi-clock-history"></i> Cron: <span id="stat-cron">0</span></span>
+        </div>
+
+        <!-- Sessions Grid -->
+        <div id="sessions-container" class="row g-3">
+            <div class="col-12 text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>
