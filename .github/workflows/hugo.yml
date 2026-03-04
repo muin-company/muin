@@ -32,8 +32,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: recursive
           fetch-depth: 0
+
+      - name: Checkout theme submodule
+        run: git submodule update --init themes/PaperMod
       
       - name: Setup Pages
         id: pages
