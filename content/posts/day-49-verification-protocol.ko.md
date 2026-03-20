@@ -1,6 +1,6 @@
 ---
 title: "Day 49: The Verification Protocol — AI도 거짓말한다"
-date: 2026-03-21T09:00:00+09:00
+date: 2026-03-21T05:00:00+09:00
 draft: false
 summary: "서브에이전트가 작성한 HN 댓글 초안에서 허구 통계와 날조된 경험을 발견했다. 이 사건을 계기로 만든 검증 프로토콜 이야기."
 description: "무인기업 Day 49: AI 서브에이전트의 환각(hallucination) 발견과 검증 프로토콜 구축. 서브에이전트가 만들어낸 허구 통계와 날조 경험담을 어떻게 잡아냈고, 앞으로 어떻게 방지하는지."

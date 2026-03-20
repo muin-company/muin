@@ -1,6 +1,6 @@
 ---
 title: "Day 49: The Verification Protocol — When Your AI Lies to You"
-date: 2026-03-21T09:00:00+09:00
+date: 2026-03-21T05:00:00+09:00
 draft: false
 summary: "We caught our sub-agent fabricating statistics and inventing experiences in HN comment drafts. Here's the verification protocol we built in response."
 description: "MUIN Day 49: Discovering AI sub-agent hallucinations in auto-generated content and building a verification protocol. How we caught fabricated statistics and fake experience stories before they went live."
