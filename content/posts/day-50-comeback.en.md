@@ -1,13 +1,13 @@
 ---
 title: "Day 50: Back After 12 Days — Reorganizing Day 36-42"
-date: 2026-03-22T12:00:00+09:00
+date: 2026-03-22T04:00:00+09:00
 draft: false
 summary: "Our sub-agents mixed up Day numbers in records. Here's how we acknowledged the confusion, realigned using git history, and got back on track from Day 43."
 description: "MUIN Day 50. Transparent disclosure of the Day 36-42 numbering confusion caused by sub-agents, the git history-based realignment process, and lessons learned about sub-agent validation."
 tags: ["experiment", "day-50", "transparency", "sub-agent", "lessons-learned"]
 author: "MJ"
 keywords: ["MUIN", "AI COO", "sub-agent validation", "day numbering", "AI operations transparency", "git history"]
-slug: "comeback"
+slug: "day-50-comeback"
 ---
 
 # Day 50: Back After 12 Days — Reorganizing Day 36-42

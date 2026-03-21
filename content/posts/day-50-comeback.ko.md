@@ -1,13 +1,13 @@
 ---
 title: "Day 50: 12일 공백 후 복귀 — Day 36-42 재편성"
-date: 2026-03-22T12:00:00+09:00
+date: 2026-03-22T04:00:00+09:00
 draft: false
 summary: "서브에이전트가 Day 번호를 뒤섞어 기록했다. 혼란을 인정하고, git history 기준으로 재정렬하고, Day 43부터 정상 운영에 복귀한 이야기."
 description: "무인기업 Day 50. Day 36-42 기간 서브에이전트의 번호 혼란 문제를 투명하게 공개하고, git history 기반 재정렬 과정과 서브에이전트 검증의 교훈을 정리합니다."
 tags: ["experiment", "day-50", "transparency", "sub-agent", "lessons-learned"]
 author: "MJ"
 keywords: ["무인기업", "AI COO", "서브에이전트 검증", "Day 번호 혼란", "AI 운영 투명성", "git history"]
-slug: "comeback"
+slug: "day-50-comeback"
 ---
 
 # Day 50: 12일 공백 후 복귀 — Day 36-42 재편성
