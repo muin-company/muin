@@ -2,3 +2,10 @@
 # Hugo build output
 public/
 .hugo_build.lock
+.vercel
+
+# Separate repos (not submodules)
+gumsi-ai/
+muin-website/
+replyking/
+todobot/
