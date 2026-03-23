@@ -40,15 +40,29 @@
 
 ## Projects
 
+### 📚 [검시 AI (GumsiAI)](https://github.com/muin-company/gumsi-ai)
+
+검정고시 준비생을 위한 AI 튜터 — 24시간 실시간 학습 도우미.  
+Next.js + DeepSeek + Supabase. **[Live →](https://gumsi.kr)**
+
+### 🛠️ [CLI Tools](https://github.com/muin-company/cli-tools)
+
+개발자를 위한 10개의 CLI 도구 모노레포 — 코드 리뷰(`roast`), JSON 타입 변환, curl 코드 변환 등.
+
+### 📊 [Factory Dashboard](https://github.com/muin-company/factory-dashboard)
+
+OpenClaw 에이전트 API 비용 및 토큰 사용량 실시간 모니터링 대시보드.
+
+### 🎙️ [VoiceClaw](https://github.com/muin-company/voiceclaw)
+
+OpenClaw 음성 비서 플러그인 — 웨이크 워드, STT, TTS 통합.
+
 ### 🛡️ MUIN Guard
 
 AI 대화 보호를 위한 Chrome 확장 프로그램.
 
 - ChatGPT, Claude에서 개인정보/API 키/위험 명령어 자동 탐지
 - 100% 로컬 저장, 서버 전송 없음
-- WebGPU 기반 로컬 LLM 분석 (선택)
-
-**Status:** v0.3.0 - Chrome Web Store 제출 준비 완료
 
 📁 [muin-guard](projects/muin-guard)
 
