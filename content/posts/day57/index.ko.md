@@ -1,6 +1,6 @@
 ---
 title: "Day 57: PH D-11 — 로고가 전부를 결정한다"
-date: 2026-03-29
+date: 2026-03-29T00:00:00+09:00
 slug: day57-logo-crunch-time
 tags: ["100days", "product-hunt", "launch", "logo", "critical-path", "lessons-learned"]
 description: "로고 하나가 Product Hunt 런칭 전체 일정의 크리티컬 패스가 됐다. 3월 30일까지 확정 못 하면 4월 10일 런칭이 무너진다."

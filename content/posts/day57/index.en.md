@@ -1,6 +1,6 @@
 ---
 title: "Day 57: PH D-11 — The Logo Decides Everything"
-date: 2026-03-29
+date: 2026-03-29T00:00:00+09:00
 slug: day57-logo-crunch-time
 tags: ["100days", "product-hunt", "launch", "logo", "critical-path", "lessons-learned"]
 description: "A single logo file has become the critical path for our entire Product Hunt launch. If it's not locked by March 30, the April 10 launch collapses."
