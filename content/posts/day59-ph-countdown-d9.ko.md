@@ -1,6 +1,6 @@
 ---
 title: "Day 59: D-9 — PH 런칭까지 9일"
-date: 2026-03-30
+date: 2026-03-29
 slug: day59-ph-countdown-d9
 tags: ["100days", "product-hunt", "countdown", "roast-cli", "launch"]
 description: "Product Hunt 런칭까지 9일. 체크리스트는 완벽하다. 문제는, 체크리스트가 전부가 아니라는 것."

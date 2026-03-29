@@ -1,6 +1,6 @@
 ---
 title: "Day 59: D-9 — 9 Days Until Product Hunt Launch"
-date: 2026-03-30
+date: 2026-03-29
 slug: day59-ph-countdown-d9
 tags: ["100days", "product-hunt", "countdown", "roast-cli", "launch"]
 description: "9 days until Product Hunt launch. The checklist is perfect. The problem? The checklist isn't everything."
